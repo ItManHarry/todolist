@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+{# 显式地使用with context声明传人当前模板的上下文 #}
+{% from 'macros/macros.html' import static_file with context %}
+{% from 'bootstrap/nav.html' import render_nav_item  with context %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>待办事项</title>
+    <!-- 使用宏导入静态文件 -->
+    {{static_file('icon', 'images/icon/favicon.ico')}}
+    {{static_file('css','css/bootstrap.min.css')}}
+    {{static_file('css','css/jquery-confirm.min.css')}}
+    {{static_file('css','css/all.min.css')}}
+    {{static_file('js','js/jquery-3.6.0.min.js')}}
+    {{static_file('js','js/popper.min.js')}}
+    {{static_file('js','js/bootstrap.min.js')}}
+    {{static_file('js','js/jquery-confirm.min.js')}}
+    <!-- 生成执行时间渲染函数 -->
+    {{ moment.include_moment(local_js=url_for('static',filename='js/moment/moment-with-locales.js')) }}
+    <!-- 设置自动识别显示语言 -->
+    {{ moment.locale(auto_detect=True) }}
+</head>
+<body>
+    <div id = "main">{% include '_login.html' %}</div>
+    <script>
+        var csrf_token = "{{ csrf_token() }}"
+        {#
+        var url_for_login_page = "{{ auth.login }}"
+        var url_for_app_page = "{{ todo.app }}"
+        var url_for_intro_page = "{{ home.intro }}"
+        var url_for_new_item = "{{ todo.new_item }}"
+        var url_for_clear_item = "{{ todo.clear_item }}"
+        var url_for_login = "{{ auth.login }}"
+        var url_for_register = "{{ auth.register }}"
+        var url_for_logout = "{{ auth.logout }}"
+        #}
+    </script>
+</body>
+</html>

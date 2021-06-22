@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask_wtf.csrf import CSRFError
 from work.settings import config
 from work.extensions import bootstrap, db, moment, mail, migrate, csrf
@@ -17,6 +17,7 @@ def create_app(config_name=None):
     register_app_global_path(app)
     register_app_global_context(app)
     register_app_error_pages(app)
+    register_app_views(app)
     register_app_shell(app)
     register_app_command(app)
     return app
@@ -30,9 +31,9 @@ def register_app_extensions(app):
     csrf.init_app(app)
 #配置全局路径
 def register_app_global_path(app):
-    @app.route('/index')
+    @app.route('/')
     def index():
-        return '<h1>To to list ...</h1>'
+        return redirect(url_for("main.index"))
 #配件全局函数/变量
 def register_app_global_context(app):
     from work.tools import get_time
@@ -56,6 +57,10 @@ def register_app_error_pages(app):
     @app.errorhandler(CSRFError)
     def csrf_error(e):
         return render_template('errors/csrf.html')
+#配置系统功能模块
+def register_app_views(app):
+    from work.views.main import bp_main
+    app.register_blueprint(bp_main, url_prefix='/main')
 #配置shell环境
 def register_app_shell(app):
     @app.shell_context_processor
