@@ -2,6 +2,8 @@ from flask import Flask, render_template
 from flask_wtf.csrf import CSRFError
 from work.settings import config
 from work.extensions import bootstrap, db, moment, mail, migrate, csrf
+import click
+import uuid
 #创建Flask实例
 def create_app(config_name=None):
     if config_name == None:
@@ -16,6 +18,7 @@ def create_app(config_name=None):
     register_app_global_context(app)
     register_app_error_pages(app)
     register_app_shell(app)
+    register_app_command(app)
     return app
 #注册系统组件
 def register_app_extensions(app):
@@ -58,3 +61,29 @@ def register_app_shell(app):
     @app.shell_context_processor
     def make_shell_context():
         return dict(db=db)
+#配置系统自定义命令
+def register_app_command(app):
+    #初始化系统
+    @app.cli.command()
+    @click.option('--username', prompt=True, help='管理员账号......')
+    @click.option('--password', prompt=True, hide_input=True, confirmation_prompt=True, help='管理员密码......')
+    def init(username, password):
+        from work.models import User
+        click.echo('执行数据库初始化......')
+        db.create_all()
+        click.echo('数据库初始化完成......')
+        click.echo('创建系统管理员......')
+        user = User.query.first()
+        if user:
+            click.echo('管理员已存在, 无需创建')
+        else:
+            user = User(
+                id = uuid.uuid4().hex,
+                code = username.lower(),
+                name = username.lower()
+            )
+            user.set_password(password)
+            db.session.add(user)
+            db.session.commit()
+            click.echo('系统管理员创建完成......')
+        click.echo('系统初始化完成......')
