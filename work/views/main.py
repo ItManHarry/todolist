@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 bp_main = Blueprint('main', __name__)
-#系统主页
-@bp_main.route('/index')
-def index():
-    return render_template('index.html')
+#自我简介
+@bp_main.route('/intro')
+def intro():
+    return render_template('main/_intro.html')

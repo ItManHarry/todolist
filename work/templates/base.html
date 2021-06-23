@@ -1,23 +1,46 @@
-<header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"><i class="fas fa-clipboard-list"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class = "container-fluid">
-        <div class="row">
-            <div class="col-12">
-                &nbsp;
-            </div>
-        </div>
-    </div>
-</nav>
-</header><br>
-<main>
-    {% block content %}{% endblock %}
-</main>
-<footer class="text-center">
-    <small> &copy; 2021 <a class="blue-text link" href="http://greyli.com" title="Written by Harry Cheng">Harry Cheng</a> -
-        <a class="blue-text link" href="https://github.com/ItManHarry/todolist" title="Fork me on GitHub">GitHub</a>
-    </small>
-</footer>
+<!DOCTYPE html>
+<html lang="en">
+{# 显式地使用with context声明传人当前模板的上下文 #}
+{% from 'macros/macros.html' import static_file with context %}
+{% from 'bootstrap/nav.html' import render_nav_item  with context %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}基础页面{% endblock %}</title>
+    <!-- 使用宏导入静态文件 -->
+    {{static_file('icon', 'images/icon/favicon.ico')}}
+    {{static_file('css', 'css/bootstrap.min.css')}}
+    {{static_file('css', 'css/jquery-confirm.min.css')}}
+    {{static_file('css', 'css/all.min.css')}}
+    {# --------- 引入子页面自己的css文件 --------- #}
+    {% block links %}{% endblock %}
+    {{static_file('js', 'js/jquery-3.6.0.min.js')}}
+    {{static_file('js', 'js/popper.min.js')}}
+    {{static_file('js', 'js/bootstrap.min.js')}}
+    {{static_file('js', 'js/jquery-confirm.min.js')}}
+    <!-- 生成执行时间渲染函数 -->
+    {{ moment.include_moment(local_js=url_for('static',filename='js/moment/moment-with-locales.js')) }}
+    <!-- 设置自动识别显示语言 -->
+    {{ moment.locale(auto_detect=True) }}
+    {# --------- 引入子页面自己的JavaScript文件 --------- #}
+    {% block scripts %}{% endblock %}
+    {# --------- 编写子页面自己的css样式 --------- #}
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <header>
+        {% include '_nav.html'%}
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="text-center">
+        <small> &copy; 2021 <a class="blue-text link" href="https://github.com/ItManHarry/todolist" title="Written by Harry Cheng">Harry Cheng</a> -
+            <a class="blue-text link" href="https://github.com" title="Fork me on GitHub">GitHub</a>
+        </small>
+    </footer>
+    <script>
+        {% block javascript %}{% endblock %}
+    </script>
+</body>
+</html>

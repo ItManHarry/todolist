@@ -33,7 +33,7 @@ def register_app_extensions(app):
 def register_app_global_path(app):
     @app.route('/')
     def index():
-        return redirect(url_for("main.index"))
+        return render_template('index.html')
 #配件全局函数/变量
 def register_app_global_context(app):
     from work.tools import get_time
@@ -59,8 +59,12 @@ def register_app_error_pages(app):
         return render_template('errors/csrf.html')
 #配置系统功能模块
 def register_app_views(app):
+    from work.views.auth import bp_auth
     from work.views.main import bp_main
+    from work.views.item import bp_item
+    app.register_blueprint(bp_auth, url_prefix='/auth')
     app.register_blueprint(bp_main, url_prefix='/main')
+    app.register_blueprint(bp_item, url_prefix='/item')
 #配置shell环境
 def register_app_shell(app):
     @app.shell_context_processor
