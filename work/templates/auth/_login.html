@@ -1,1 +1,113 @@
-<h1>System Login ......</h1>
+<div class="row text-center">
+    <div class="col">
+        <h1 text-center>Login</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6 offset-3">
+        <form class="needs-validation" novalidate id = "login_form">
+            <div class="form-group">
+              <label for="code">账号</label>
+              <input type="text" class="form-control" id="code" name="code" required>
+              <div class="invalid-feedback" id = "code_feedback">&nbsp;</div>
+            </div>
+            <div class="form-group">
+              <label for="password">密码</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+              <div class="invalid-feedback" id = "password_feedback">&nbsp;</div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="row">
+            <div class="col-8 text-right">
+                <small>没有账号?</small><button class="btn btn-link">现在注册</button>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-outline-info btn-block" id = "login_btn">登录</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var code_ok = false, password_ok = false
+    $(function(){
+        $("#login_btn").click(function(){
+            if(!code_ok){
+                $("#code").removeClass('is-valid')
+                $("#code").addClass('is-invalid')
+                $('#code_feedback').html('账号不能为空!!!')
+            }
+            if(!password_ok){
+                $("#password").removeClass('is-valid')
+                $("#password").addClass('is-invalid')
+                $('#password_feedback').html('密码不能为空!!!')
+            }
+            if(code_ok && password_ok){
+                $.ajax({
+                    type:'post',
+                    url:'/auth/enter',
+                    data:JSON.stringify({code:$.trim($("#code").val()), password:$.trim($("#password").val())}),
+                    contentType:'application/json;charset=UTF-8',
+                    success:function(data){
+                        if(data.code == 1)
+                            $.alert({
+                               type:'green',
+                               title:'系统信息',
+                               content: '登录成功',
+                               onClose:function(){
+
+                               }
+                           })
+                        else
+                            $.alert({
+                               type:'red',
+                               title:'系统信息',
+                               content: data.message,
+                               onClose:function(){
+
+                               }
+                           })
+                    },
+                    error:function(){
+                        $.alert({
+                           type:'red',
+                           //icon:'fa fa-info',
+                           title:'系统错误',
+                           content: '系统异常,请联系管理员!',
+                           onClose:function(){
+
+                           }
+                       })
+                    }
+                })
+            }
+        })
+        $("#code").keyup(function(){
+            if($.trim($(this).val()) != ''){
+                $(this).removeClass('is-invalid')
+                $(this).addClass('is-valid')
+                $('#code_feedback').html('&nbsp;')
+                code_ok = true
+            }else{
+                $(this).removeClass('is-valid')
+                $(this).addClass('is-invalid')
+                $('#code_feedback').html('账号不能为空!!!')
+            }
+        })
+        $("#password").keyup(function(){
+            if($.trim($(this).val()) != ''){
+                $(this).removeClass('is-invalid')
+                $(this).addClass('is-valid')
+                $('#code_feedback').html('&nbsp;')
+                password_ok = true
+            }else{
+                $(this).removeClass('is-valid')
+                $(this).addClass('is-invalid')
+                $('#password_feedback').html('密码不能为空!!!')
+            }
+        })
+    })
+</script>
