@@ -25,6 +25,7 @@ class User(db.Model, UserMixin):
 class Item(db.Model):
     id = db.Column(db.String(32), primary_key=True)                             # ID
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)     # 创建时间
+    title = db.Column(db.String(64))                                            # 待办事项主题
     body = db.Column(db.Text)                                                   # 待办事项内容
     done = db.Column(db.Boolean, default=False)                                 # 是否完成
     author_id = db.Column(db.String(32), db.ForeignKey('user.id'))              # 待办事项人ID

@@ -1,1 +1,33 @@
-<h1>To do App ......</h1>
+<div class="row">
+    <div class="col">
+    {% if items %}
+        {% for item in items %}
+            <div class="list-group">
+                <div class="list-group-item list-group-item-action">
+                    <small>{{ item.title }}&nbsp;&nbsp;{{format_time(item.timestamp)}}</small>
+                    <hr>
+                    <h5>
+                        &nbsp;&nbsp;
+                        <input type="checkbox" class="form-check-input" disabled {% if item.done %}checked{% endif %}>
+                        {{ item.body }}
+                        <small class="float-right">
+                            <button class="btn btn-sm btn-link"><i class="fas fa-check-circle"></i></button>
+                            <button class="btn btn-sm btn-link"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-link"><i class="fas fa-trash-alt"></i></button>
+                        </small>
+                    </h5>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <small>暂无待办事项!!!</small>&nbsp;&nbsp;<button class="btn btn-link btn-sm" id = "add"><i class="fas fa-plus"></i>&nbsp;&nbsp;添加</button>
+    {% endif %}
+    </div>
+</div>
+<script>
+    $(function(){
+        $("#add").click(function(){
+            route('item')
+        })
+    })
+</script>

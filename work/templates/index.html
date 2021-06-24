@@ -20,6 +20,7 @@
     var url_for_login_page = "{{ url_for('auth.login') }}"  //登录页面
     var url_for_todo_page = "{{ url_for('item.todo') }}"    //待办页面
     var url_for_intro_page = "{{ url_for('main.intro') }}"  //系统主页
+    var url_for_item_page = "{{ url_for('item.item') }}"     //新增修改待办事项
     {#
     var url_for_new_item = "{{ url_for('item.new_item') }}"
     var url_for_clear_item = "{{ url_for('item.clear_item') }}"
@@ -60,6 +61,8 @@
                 url = url_for_login_page
             else if(hash === 'todo')
                 url = url_for_todo_page
+            else if(hash == 'item')
+                url = url_for_item_page
             else
                 url = url_for_intro_page
             $.ajax({
@@ -73,7 +76,7 @@
         })
         //默认执行intro界面
         if(window.location.hash === '')
-            window.location.hash = '#intro'
+            window.location.hash = authenticated?'#todo':'#intro'
         else
             $(window).trigger('hashchange')
     })
@@ -85,6 +88,8 @@
             window.location.hash = '#register'
         else if(to === 'todo')
             window.location.hash = '#todo'
+        else if(to === 'item')
+            window.location.hash = '#item'
         else if(to === 'intro')
             window.location.hash = '#intro'
     }

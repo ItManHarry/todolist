@@ -37,10 +37,10 @@ def register_app_global_path(app):
         return render_template('index.html')
 #配件全局函数/变量
 def register_app_global_context(app):
-    from work.tools import get_time
+    from work.tools import get_time, format_time
     @app.context_processor
     def make_context_processor():
-        return dict(get_time=get_time)
+        return dict(get_time=get_time, format_time=format_time)
 #配置系统错误页面
 def register_app_error_pages(app):
     @app.errorhandler(400)

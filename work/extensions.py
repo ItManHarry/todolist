@@ -16,6 +16,7 @@ mail = Mail()
 migrate = Migrate()
 csrf = CSRFProtect()
 login_manager = LoginManager()
+#使用flask_login必须配置此项
 @login_manager.user_loader
 def load_user(user_id):
     from work.models import User

@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-12">
+        <form class="needs-validation" novalidate id = "item_form">
+            <div class="form-group">
+              <label for="title">标题</label>
+              <input type="text" class="form-control" id="title" name="title" required>
+              <div class="invalid-feedback" id = "title_feedback">&nbsp;</div>
+            </div>
+            <div class="form-group">
+              <label for="body">内容</label>
+              <textarea class="form-control" id="body" name="body" rows="3" required></textarea>
+              <div class="invalid-feedback" id = "body_feedback">&nbsp;</div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="col-4 offset-8">
+                <button type="button" class="btn btn-outline-info btn-block" id = "save_btn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var title_ok = false, body_ok = false
+    $(function(){
+        $("#save_btn").click(function(){
+            if(!title_ok){
+                $("#title").removeClass('is-valid')
+                $("#title").addClass('is-invalid')
+                $('#title_feedback').html('标题不能为空!!!')
+            }
+            if(!body_ok){
+                $("#body").removeClass('is-valid')
+                $("#body").addClass('is-invalid')
+                $('#body_feedback').html('内容不能为空!!!')
+            }
+            if(title_ok && body_ok){
+                $.ajax({
+                    type:'post',
+                    url:'/item/add',
+                    data:JSON.stringify({title:$.trim($("#title").val()), body:$.trim($("#body").val())}),
+                    contentType:'application/json;charset=UTF-8',
+                    success:function(data){
+                        if(data.code == 1){
+                            route('todo')
+                        }else{
+                            $.alert({
+                               type:'red',
+                               title:'系统信息',
+                               content: data.message,
+                               onClose:function(){
+
+                               }
+                           })
+                        }
+                    },
+                    error:function(){
+                        $.alert({
+                           type:'red',
+                           title:'系统错误',
+                           content: '系统异常,请联系管理员!',
+                           onClose:function(){}
+                       })
+                    }
+                })
+            }
+        })
+        $("#title").keyup(function(){
+            if($.trim($(this).val()) != ''){
+                $(this).removeClass('is-invalid')
+                $(this).addClass('is-valid')
+                $('#title_feedback').html('&nbsp;')
+                title_ok = true
+            }else{
+                $(this).removeClass('is-valid')
+                $(this).addClass('is-invalid')
+                $('#title_feedback').html('账号不能为空!!!')
+            }
+        })
+        $("#body").keyup(function(){
+            if($.trim($(this).val()) != ''){
+                $(this).removeClass('is-invalid')
+                $(this).addClass('is-valid')
+                $('#body_feedback').html('&nbsp;')
+                body_ok = true
+            }else{
+                $(this).removeClass('is-valid')
+                $(this).addClass('is-invalid')
+                $('#body_feedback').html('密码不能为空!!!')
+            }
+        })
+    })
+</script>
