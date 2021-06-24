@@ -12,10 +12,14 @@
 {% endblock %}
 {% block javascript %}
     {{ super() }}
-    var csrf_token = "{{ csrf_token() }}"
-    var url_for_login_page = "{{ url_for('auth.login') }}"
-    var url_for_todo_page = "{{ url_for('item.todo') }}"
-    var url_for_intro_page = "{{ url_for('main.intro') }}"
+    var authenticated = false                               //是否登录
+    {% if current_user.is_authenticated %}
+        authenticated = true
+    {% endif %}
+    var csrf_token = "{{ csrf_token() }}"                   //CSRF令牌
+    var url_for_login_page = "{{ url_for('auth.login') }}"  //登录页面
+    var url_for_todo_page = "{{ url_for('item.todo') }}"    //待办页面
+    var url_for_intro_page = "{{ url_for('main.intro') }}"  //系统主页
     {#
     var url_for_new_item = "{{ url_for('item.new_item') }}"
     var url_for_clear_item = "{{ url_for('item.clear_item') }}"
@@ -24,6 +28,22 @@
     var url_for_logout = "{{ url_for('auth.logout') }}"
     #}
     $(function(){
+        //控制登录/登出按钮显示隐藏
+        if(authenticated){
+            $("#sys_login").hide()
+            $("#sys_logout").show()
+        }else{
+            $("#sys_login").show()
+            $("#sys_logout").hide()
+        }
+        //绑定登出事件
+        $("#sys_logout").click(function(){
+            $.get('/auth/exit', function(){
+                $("#sys_login").show()
+                $("#sys_logout").hide()
+                route('intro')
+            })
+        })
         //ajax设置统一添加csrf验证
         $.ajaxSetup({
             beforeSend: function (xhr, settings) {
@@ -63,5 +83,9 @@
             window.location.hash = '#login'
         else if(to === 'register')
             window.location.hash = '#register'
+        else if(to === 'todo')
+            window.location.hash = '#todo'
+        else if(to === 'intro')
+            window.location.hash = '#intro'
     }
 {% endblock %}

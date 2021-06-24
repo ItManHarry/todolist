@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request
+from flask_login import login_user, logout_user
 from work.models import User
 bp_auth = Blueprint('auth', __name__)
 @bp_auth.route('/login')
@@ -15,4 +16,9 @@ def enter():
             return jsonify(code=0, message='密码错误!!!')
     else:
         return jsonify(code=0, message='用户不存在!!!')
+    login_user(user, True)
     return jsonify(code=1, message='OK')
+@bp_auth.route('/exit')
+def exit():
+    logout_user()
+    return jsonify(code=1, message='用户已登出')

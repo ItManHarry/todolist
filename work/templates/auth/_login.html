@@ -52,16 +52,11 @@
                     data:JSON.stringify({code:$.trim($("#code").val()), password:$.trim($("#password").val())}),
                     contentType:'application/json;charset=UTF-8',
                     success:function(data){
-                        if(data.code == 1)
-                            $.alert({
-                               type:'green',
-                               title:'系统信息',
-                               content: '登录成功',
-                               onClose:function(){
-
-                               }
-                           })
-                        else
+                        if(data.code == 1){
+                            $("#sys_logout").show()
+                            $("#sys_login").hide()
+                            route('todo')
+                        }else{
                             $.alert({
                                type:'red',
                                title:'系统信息',
@@ -70,6 +65,7 @@
 
                                }
                            })
+                        }
                     },
                     error:function(){
                         $.alert({

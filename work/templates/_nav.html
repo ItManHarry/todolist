@@ -1,6 +1,7 @@
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="{{ url_for('index') }}"><i class="fas fa-clipboard-list"></i>&nbsp;&nbsp;待办事项</a>
   <form class="form-inline">
-    <button class="btn btn-outline-success float-right" onclick="route('login')"><i class="fas fa-sign-in-alt"></i></button>
+    <button class="btn btn-outline-success float-right" onclick="route('login')" id = "sys_login"><i class="fas fa-sign-in-alt"></i></button>
+    <button class="btn btn-outline-success float-right" id = "sys_logout"><i class="fas fa-sign-out-alt"></i></button>
   </form>
 </nav>
