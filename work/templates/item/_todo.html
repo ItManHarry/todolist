@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col text-right">
-        <button class="btn btn-outline-success btn-sm" id = "add"><i class="fas fa-plus"></i>&nbsp;&nbsp;添加</button>
+        <button class="btn btn-outline-success btn-sm" onclick="route('item')"><i class="fas fa-plus"></i>&nbsp;&nbsp;添加</button>
     </div>
 </div><br>
 <div class="row">
@@ -30,25 +30,3 @@
     {% endif %}
     </div>
 </div>
-<script>
-    $(function(){
-        $("#add").click(function(){
-            route('item')
-        })
-    })
-    //标记完成
-    function finish(item_id){
-        alert('item_id')
-        location.reload()
-    }
-    //修改待办
-    function edit(item_id){
-        alert('item_id')
-        location.reload()
-    }
-    //删除待办
-    function delete(item_id){
-        alert('item_id')
-        location.reload()
-    }
-</script>
