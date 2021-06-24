@@ -16,6 +16,8 @@ def item():
     return render_template('item/_item.html')
 @bp_item.route('/add', methods=['POST'])
 def add():
+    if not current_user.is_active:
+        return jsonify(code=0, message='登录超时,请重新登录!!!')
     data = request.get_json()
     title = data['title']
     body = data['body']

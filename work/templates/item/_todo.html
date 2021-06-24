@@ -1,4 +1,9 @@
 <div class="row">
+    <div class="col text-right">
+        <button class="btn btn-outline-success btn-sm" id = "add"><i class="fas fa-plus"></i>&nbsp;&nbsp;添加</button>
+    </div>
+</div><br>
+<div class="row">
     <div class="col">
     {% if items %}
         {% for item in items %}
@@ -21,7 +26,7 @@
             </div>
         {% endfor %}
     {% else %}
-        <small>暂无待办事项!!!</small>&nbsp;&nbsp;<button class="btn btn-link btn-sm" id = "add"><i class="fas fa-plus"></i>&nbsp;&nbsp;添加</button>
+        <small>暂无待办事项!!!</small>
     {% endif %}
     </div>
 </div>
