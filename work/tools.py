@@ -9,11 +9,11 @@ import os, uuid
 #utc时间转本地
 def utc_to_locale(utc_date):
     now_stamp = time.time()
-    local_time = datetime.datetime.fromtimestamp(now_stamp)
+    locale_time = datetime.datetime.fromtimestamp(now_stamp)
     utc_time = datetime.datetime.utcfromtimestamp(now_stamp)
-    offset = local_time - utc_time
-    local_date = utc_date + offset
-    return local_date
+    offset = locale_time - utc_time
+    locale_date = utc_date + offset
+    return locale_date
 #获取当前时间
 def get_time():
     return 'Now is : %s' %time.strftime('%Y年%m月%d日')

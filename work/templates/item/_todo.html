@@ -3,19 +3,20 @@
     {% if items %}
         {% for item in items %}
             <div class="list-group">
-                <div class="list-group-item list-group-item-action">
+                <div class="list-group-item">
                     <small>{{ item.title }}&nbsp;&nbsp;{{format_time(item.timestamp)}}</small>
                     <hr>
-                    <h5>
+                    <p>
                         &nbsp;&nbsp;
                         <input type="checkbox" class="form-check-input" disabled {% if item.done %}checked{% endif %}>
                         {{ item.body }}
+                        <hr>
                         <small class="float-right">
-                            <button class="btn btn-sm btn-link"><i class="fas fa-check-circle"></i></button>
-                            <button class="btn btn-sm btn-link"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-sm btn-link"><i class="fas fa-trash-alt"></i></button>
+                            <button class="btn btn-sm btn-link" onclick="finish('{{ item.id }}')"><i class="fas fa-check-circle"></i></button>
+                            <button class="btn btn-sm btn-link" onclick="edit('{{ item.id }}')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-link" onclick="delete('{{ item.id }}')"><i class="fas fa-trash-alt"></i></button>
                         </small>
-                    </h5>
+                    </p>
                 </div>
             </div>
         {% endfor %}
@@ -30,4 +31,19 @@
             route('item')
         })
     })
+    //标记完成
+    function finish(item_id){
+        alert('item_id')
+        location.reload()
+    }
+    //修改待办
+    function edit(item_id){
+        alert('item_id')
+        location.reload()
+    }
+    //删除待办
+    function delete(item_id){
+        alert('item_id')
+        location.reload()
+    }
 </script>
