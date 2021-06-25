@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_wtf.csrf import CSRFError
 from work.settings import config
-from work.extensions import bootstrap, db, moment, mail, migrate, csrf, login_manager
+from work.extensions import bootstrap, db, moment, mail, migrate, csrf, login_manager, babel
 import click
 import uuid
 #创建Flask实例
@@ -30,6 +30,7 @@ def register_app_extensions(app):
     migrate.init_app(app)
     csrf.init_app(app)
     login_manager.init_app(app)
+    babel.init_app(app)
 #配置全局路径
 def register_app_global_path(app):
     @app.route('/')

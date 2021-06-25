@@ -10,8 +10,10 @@ pro_db = os.getenv('PRODUCT_DB')
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 #全局配置
 class GlobalSetting():
-    SECRET_KEY = os.getenv('SECRET_KEY', '123456789qwertyuio!@#$')  #秘钥(session使用)
+    SECRET_KEY = os.getenv('SECRET_KEY', '123456789qwertyuio!@#$')  # 秘钥(session使用)
     BOOTSTRAP_SERVE_LOCAL = True                                    # Bootstrap本地化
+    SYS_LOCALES = ['zh_Hans_CN', 'en_US']                           # 国际化区域设置
+    BABEL_DEFAULT_LOCALE = SYS_LOCALES[0]                           # 默认语言区域
 #开发配置
 class DevelopSetting(GlobalSetting):
     # 数据库配置

@@ -93,4 +93,10 @@
         else if(to === 'intro')
             window.location.hash = '#intro'
     }
+    //语言设置
+    function set_locale(locale_url){
+        $.get(locale_url, function(){
+            $(window).trigger('hashchange')
+        })
+    }
 {% endblock %}

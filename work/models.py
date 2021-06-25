@@ -11,6 +11,7 @@ class User(db.Model, UserMixin):
     code = db.Column(db.String(32), unique=True, index=True)                    # 账号
     name = db.Column(db.String(32))                                             # 姓名
     password_hash = db.Column(db.String(128))                                   # 密码
+    locale = db.Column(db.String(20), default='zh_Hans_CN')                     # 区域所属(国际化)
     items = db.relationship('Item', back_populates='author', cascade='all')     # 待办事项
 
     #使用werkzeug.security提供的加密方式设置密码
