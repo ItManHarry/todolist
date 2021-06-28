@@ -96,7 +96,8 @@
     //语言设置
     function set_locale(locale_url){
         $.get(locale_url, function(){
-            $(window).trigger('hashchange')
+            //$(window).trigger('hashchange')
+            location.reload()
         })
     }
 {% endblock %}

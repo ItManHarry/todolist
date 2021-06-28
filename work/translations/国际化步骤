@@ -1,0 +1,22 @@
+1. 项目根目录下编写配置文件: babel.cfg
+
+    [python: work/**.py]
+    [jinja2: work/**.html]
+
+2. 使用pybabel extract命令提取所有待翻译文本
+
+    pybabel extract -F babel.cfg - k _l -o messages.pot .
+
+3. templates同级目录下创建translations文件夹，使用pybabel init命令来为特定的区域创建消息目录
+
+    pybabel init -i messages.pot -d work/translations -l zh_Hans_CN
+
+    每一条要翻译的消息都由三部分组成，示例如下：
+    #：消息所在的文件名与代码行数
+    msgid "提取出来待翻译的消息正文"
+    msgstr "填入翻译文本"
+
+4. 编译MO文件并调试
+
+    pybabel compile -d work/translations
+
