@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-29 10:12+0800\n"
+"POT-Creation-Date: 2021-06-29 11:07+0800\n"
 "PO-Revision-Date: 2021-06-28 16:02+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_CN\n"
@@ -24,7 +24,7 @@ msgstr "待办事项"
 
 #: work/templates/_nav.html:6
 msgid "lang.select"
-msgstr "选择语言"
+msgstr "语言"
 
 #: work/templates/_nav.html:9
 msgid "lang.cn"
@@ -54,7 +54,27 @@ msgstr "现在注册"
 msgid "auth.login"
 msgstr "登录"
 
-#: work/templates/errors/400.html:7
+#: work/templates/auth/_login.html:41 work/templates/auth/_login.html:93
+msgid "account.empty"
+msgstr "账号不能为空！"
+
+#: work/templates/auth/_login.html:46 work/templates/auth/_login.html:105
+msgid "password.empty"
+msgstr "密码不能为空！"
+
+#: work/templates/auth/_login.html:62
+msgid "sys.info"
+msgstr "系统提示"
+
+#: work/templates/auth/_login.html:74
+msgid "sys.error"
+msgstr "系统错误"
+
+#: work/templates/auth/_login.html:75
+msgid "system.common.error"
+msgstr "系统错误"
+
+#: work/templates/errors/400.html:2 work/templates/errors/400.html:7
 msgid "request.unavailable"
 msgstr "访问无效"
 
@@ -64,21 +84,26 @@ msgstr "访问无效"
 msgid "back.home"
 msgstr "返回主页"
 
-#: work/templates/errors/403.html:7
+#: work/templates/errors/403.html:2 work/templates/errors/403.html:7
 msgid "request.forbidden"
 msgstr "禁止访问"
 
-#: work/templates/errors/404.html:7
+#: work/templates/errors/404.html:2 work/templates/errors/404.html:7
 msgid "request.page.not.found"
 msgstr "页面未找到"
 
-#: work/templates/errors/413.html:7
+#: work/templates/errors/413.html:2 work/templates/errors/413.html:7
 msgid "request.file.is.too.big"
 msgstr "上传文件过大"
 
-#: work/templates/errors/500.html:7
+#: work/templates/errors/500.html:2 work/templates/errors/500.html:7
 msgid "request.internal.error"
 msgstr "系统内部错误"
+
+#: work/templates/errors/csrf.html:2 work/templates/errors/csrf.html:7
+#, fuzzy
+msgid "request.csrf.error"
+msgstr "CSRF校验错误！"
 
 #: work/templates/item/_item.html:5
 msgid "item.title"
@@ -87,6 +112,10 @@ msgstr "标题"
 #: work/templates/item/_item.html:10
 msgid "item.body"
 msgstr "内容"
+
+#: work/templates/item/_item.html:21
+msgid "common.save"
+msgstr "保存"
 
 #: work/templates/item/_todo.html:3
 msgid "item.add"

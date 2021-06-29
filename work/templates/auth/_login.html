@@ -38,12 +38,12 @@
             if(!code_ok){
                 $("#code").removeClass('is-valid')
                 $("#code").addClass('is-invalid')
-                $('#code_feedback').html('账号不能为空!!!')
+                $('#code_feedback').html('{{_('account.empty')}}')
             }
             if(!password_ok){
                 $("#password").removeClass('is-valid')
                 $("#password").addClass('is-invalid')
-                $('#password_feedback').html('密码不能为空!!!')
+                $('#password_feedback').html('{{_('password.empty')}}')
             }
             if(code_ok && password_ok){
                 $.ajax({
@@ -59,7 +59,7 @@
                         }else{
                             $.alert({
                                type:'red',
-                               title:'系统信息',
+                               title:'{{_('sys.info')}}',
                                content: data.message,
                                onClose:function(){
 
@@ -71,8 +71,8 @@
                         $.alert({
                            type:'red',
                            //icon:'fa fa-info',
-                           title:'系统错误',
-                           content: '系统异常,请联系管理员!',
+                           title:'{{_('sys.error')}}',
+                           content: '{{_('system.common.error')}}',
                            onClose:function(){
 
                            }
@@ -90,7 +90,7 @@
             }else{
                 $(this).removeClass('is-valid')
                 $(this).addClass('is-invalid')
-                $('#code_feedback').html('账号不能为空!!!')
+                $('#code_feedback').html('{{_('account.empty')}}')
             }
         })
         $("#password").keyup(function(){
@@ -102,7 +102,7 @@
             }else{
                 $(this).removeClass('is-valid')
                 $(this).addClass('is-invalid')
-                $('#password_feedback').html('密码不能为空!!!')
+                $('#password_feedback').html('{{_('password.empty')}}')
             }
         })
     })
