@@ -2,8 +2,7 @@ from flask import Flask, render_template, redirect, url_for
 from flask_wtf.csrf import CSRFError
 from work.settings import config
 from work.extensions import bootstrap, db, moment, mail, migrate, csrf, login_manager, babel
-import click
-import uuid
+import click, uuid, os
 #创建Flask实例
 def create_app(config_name=None):
     if config_name == None:
@@ -98,3 +97,34 @@ def register_app_command(app):
             db.session.commit()
             click.echo('系统管理员创建完成......')
         click.echo('系统初始化完成......')
+    #创建翻译命令组
+    @app.cli.group()
+    def translate():
+        #本地化翻译命令组
+        pass
+    @translate.command()
+    @click.argument('locale')
+    def linit(locale):
+        # 语言提取
+        if os.system('pybabel extract -F babel.cfg -k _l -o messages.pot .'):
+            raise RuntimeError('语言提取失败!')
+        # 语言初始化
+        if os.system('pybabel init -i messages.pot -d work/translations -l ' + locale):
+            raise RuntimeError('语言初始化失败!')
+        # 移除文件
+        os.remove('messages.pot')
+    @translate.command()
+    def lupdate():
+        # 语言提取
+        if os.system('pybabel extract -F babel.cfg -k _l -o messages.pot .'):
+            raise RuntimeError('语言提取失败!')
+        # 语言更新
+        if os.system('pybabel update -i messages.pot -d work/translations'):
+            raise RuntimeError('语言更新失败!')
+        # 移除文件
+        os.remove('messages.pot')
+    @translate.command()
+    def lcompile():
+        # 编译
+        if os.system('pybabel compile -d work/translations'):
+            raise RuntimeError('语言编译失败!')

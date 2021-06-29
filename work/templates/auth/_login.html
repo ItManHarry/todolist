@@ -7,12 +7,12 @@
     <div class="col-12">
         <form class="needs-validation" novalidate id = "login_form">
             <div class="form-group">
-              <label for="code">账号</label>
+              <label for="code">{{_('auth.account')}}</label>
               <input type="text" class="form-control" id="code" name="code" required>
               <div class="invalid-feedback" id = "code_feedback">&nbsp;</div>
             </div>
             <div class="form-group">
-              <label for="password">密码</label>
+              <label for="password">{{_('auth.password')}}</label>
               <input type="password" class="form-control" id="password" name="password" required>
               <div class="invalid-feedback" id = "password_feedback">&nbsp;</div>
             </div>
@@ -23,10 +23,10 @@
     <div class="col">
         <div class="row">
             <div class="col-8 text-right">
-                <small>没有账号?</small><button class="btn btn-link">现在注册</button>
+                <small>{{_('auth.no.account')}}</small><button class="btn btn-link">{{_('auth.register')}}</button>
             </div>
             <div class="col-4">
-                <button type="button" class="btn btn-outline-info btn-block" id = "login_btn">登录</button>
+                <button type="button" class="btn btn-outline-info btn-block" id = "login_btn">{{_('auth.login')}}</button>
             </div>
         </div>
     </div>

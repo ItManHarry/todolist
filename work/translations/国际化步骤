@@ -20,3 +20,15 @@
 
     pybabel compile -d work/translations
 
+5. 更新翻译
+
+    5.1 如果只更新了po文件的翻译内容，只重新编译消息目录即可
+
+        pybabel compile -d work/translations
+
+    5.2 如果你修改了程序中待翻译文本的原文,或是新标记了其他文本,为了让这些更改生效,你需要重新提取所有文本生成POT文件,然
+    后使用pybabel update 命令来执行自动合并和更新,最后编译生成mo文件
+
+        pybabel extract -F babel.cfg -k _l -o messages.pot .
+        pybabel update -i messages.pot -d work/translations
+        pybabel compile -d work/translations

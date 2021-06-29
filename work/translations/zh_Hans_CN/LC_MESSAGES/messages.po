@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-28 16:01+0800\n"
+"POT-Creation-Date: 2021-06-29 10:12+0800\n"
 "PO-Revision-Date: 2021-06-28 16:02+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_CN\n"
@@ -20,13 +20,87 @@ msgstr ""
 
 #: work/templates/_nav.html:2
 msgid "todolist"
-msgstr "待办事项(国际化)"
+msgstr "待办事项"
+
+#: work/templates/_nav.html:6
+msgid "lang.select"
+msgstr "选择语言"
+
+#: work/templates/_nav.html:9
+msgid "lang.cn"
+msgstr "简体中文"
+
+#: work/templates/_nav.html:11
+msgid "lang.en"
+msgstr "英文"
+
+#: work/templates/auth/_login.html:10
+msgid "auth.account"
+msgstr "账号"
+
+#: work/templates/auth/_login.html:15
+msgid "auth.password"
+msgstr "密码"
+
+#: work/templates/auth/_login.html:26
+msgid "auth.no.account"
+msgstr "没有账号?"
+
+#: work/templates/auth/_login.html:26
+msgid "auth.register"
+msgstr "现在注册"
+
+#: work/templates/auth/_login.html:29
+msgid "auth.login"
+msgstr "登录"
+
+#: work/templates/errors/400.html:7
+msgid "request.unavailable"
+msgstr "访问无效"
+
+#: work/templates/errors/400.html:8 work/templates/errors/403.html:8
+#: work/templates/errors/404.html:8 work/templates/errors/413.html:8
+#: work/templates/errors/500.html:8 work/templates/errors/csrf.html:8
+msgid "back.home"
+msgstr "返回主页"
+
+#: work/templates/errors/403.html:7
+msgid "request.forbidden"
+msgstr "禁止访问"
+
+#: work/templates/errors/404.html:7
+msgid "request.page.not.found"
+msgstr "页面未找到"
+
+#: work/templates/errors/413.html:7
+msgid "request.file.is.too.big"
+msgstr "上传文件过大"
+
+#: work/templates/errors/500.html:7
+msgid "request.internal.error"
+msgstr "系统内部错误"
+
+#: work/templates/item/_item.html:5
+msgid "item.title"
+msgstr "标题"
+
+#: work/templates/item/_item.html:10
+msgid "item.body"
+msgstr "内容"
+
+#: work/templates/item/_todo.html:3
+msgid "item.add"
+msgstr "添加"
+
+#: work/templates/item/_todo.html:29
+msgid "item.empty"
+msgstr "暂未待办事项！"
 
 #: work/templates/main/_intro.html:1
 msgid "main.intro"
-msgstr "系统介绍(国际化)"
+msgstr "系统介绍"
 
 #: work/views/auth.py:21
 msgid "auth.login.success"
-msgstr "登录成功(国际化)"
+msgstr "登录成功!"
 

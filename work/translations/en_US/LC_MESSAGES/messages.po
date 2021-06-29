@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-28 16:01+0800\n"
+"POT-Creation-Date: 2021-06-29 10:12+0800\n"
 "PO-Revision-Date: 2021-06-28 16:04+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -21,6 +21,80 @@ msgstr ""
 #: work/templates/_nav.html:2
 msgid "todolist"
 msgstr "To Do List"
+
+#: work/templates/_nav.html:6
+msgid "lang.select"
+msgstr "Select Language"
+
+#: work/templates/_nav.html:9
+msgid "lang.cn"
+msgstr "Simple Chinese"
+
+#: work/templates/_nav.html:11
+msgid "lang.en"
+msgstr "English"
+
+#: work/templates/auth/_login.html:10
+msgid "auth.account"
+msgstr "Account"
+
+#: work/templates/auth/_login.html:15
+msgid "auth.password"
+msgstr "Password"
+
+#: work/templates/auth/_login.html:26
+msgid "auth.no.account"
+msgstr "Has no account?"
+
+#: work/templates/auth/_login.html:26
+msgid "auth.register"
+msgstr "Register"
+
+#: work/templates/auth/_login.html:29
+msgid "auth.login"
+msgstr "Login"
+
+#: work/templates/errors/400.html:7
+msgid "request.unavailable"
+msgstr "Request Unavailable"
+
+#: work/templates/errors/400.html:8 work/templates/errors/403.html:8
+#: work/templates/errors/404.html:8 work/templates/errors/413.html:8
+#: work/templates/errors/500.html:8 work/templates/errors/csrf.html:8
+msgid "back.home"
+msgstr "Back Home"
+
+#: work/templates/errors/403.html:7
+msgid "request.forbidden"
+msgstr "Request Forbidden"
+
+#: work/templates/errors/404.html:7
+msgid "request.page.not.found"
+msgstr "Page Not Found"
+
+#: work/templates/errors/413.html:7
+msgid "request.file.is.too.big"
+msgstr "Upload file is too big"
+
+#: work/templates/errors/500.html:7
+msgid "request.internal.error"
+msgstr "Internal Error"
+
+#: work/templates/item/_item.html:5
+msgid "item.title"
+msgstr "Title"
+
+#: work/templates/item/_item.html:10
+msgid "item.body"
+msgstr "Content"
+
+#: work/templates/item/_todo.html:3
+msgid "item.add"
+msgstr "Add"
+
+#: work/templates/item/_todo.html:29
+msgid "item.empty"
+msgstr "There are no items!"
 
 #: work/templates/main/_intro.html:1
 msgid "main.intro"

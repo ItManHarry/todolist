@@ -28,9 +28,9 @@ def load_user(user_id):
 #设置区域选择函数
 @babel.localeselector
 def get_locale():
-    if current_user.is_authenticated and current_user.locale is not None:
-        return current_user.locale
     locale = request.cookies.get('locale')
     if locale is not None:
         return locale
+    if current_user.is_authenticated and current_user.locale is not None:
+        return current_user.locale
     return request.accept_languages.best_match(current_app.config['SYS_LOCALES'])
