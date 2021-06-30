@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-29 11:07+0800\n"
+"POT-Creation-Date: 2021-06-30 13:33+0800\n"
 "PO-Revision-Date: 2021-06-28 16:04+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: work/templates/_nav.html:2
+#: work/templates/_nav.html:2 work/templates/index.html:2
 msgid "todolist"
 msgstr "To Do List"
 
@@ -62,45 +62,45 @@ msgstr "Account should not be empty!"
 msgid "password.empty"
 msgstr "Password should not be empty!"
 
-#: work/templates/auth/_login.html:62
+#: work/templates/auth/_login.html:62 work/templates/item/_item.html:53
 msgid "sys.info"
 msgstr "System Info"
 
-#: work/templates/auth/_login.html:74
+#: work/templates/auth/_login.html:74 work/templates/item/_item.html:64
 msgid "sys.error"
 msgstr "System Error"
 
-#: work/templates/auth/_login.html:75
+#: work/templates/auth/_login.html:75 work/templates/item/_item.html:65
 msgid "system.common.error"
 msgstr "System Error"
 
-#: work/templates/errors/400.html:2 work/templates/errors/400.html:7
+#: work/templates/errors/400.html:2 work/templates/errors/400.html:8
 msgid "request.unavailable"
 msgstr "Request Unavailable"
 
-#: work/templates/errors/400.html:8 work/templates/errors/403.html:8
-#: work/templates/errors/404.html:8 work/templates/errors/413.html:8
-#: work/templates/errors/500.html:8 work/templates/errors/csrf.html:8
+#: work/templates/errors/400.html:9 work/templates/errors/403.html:9
+#: work/templates/errors/404.html:9 work/templates/errors/413.html:9
+#: work/templates/errors/500.html:9 work/templates/errors/csrf.html:9
 msgid "back.home"
 msgstr "Back Home"
 
-#: work/templates/errors/403.html:2 work/templates/errors/403.html:7
+#: work/templates/errors/403.html:2 work/templates/errors/403.html:8
 msgid "request.forbidden"
 msgstr "Request Forbidden"
 
-#: work/templates/errors/404.html:2 work/templates/errors/404.html:7
+#: work/templates/errors/404.html:2 work/templates/errors/404.html:8
 msgid "request.page.not.found"
 msgstr "Page Not Found"
 
-#: work/templates/errors/413.html:2 work/templates/errors/413.html:7
+#: work/templates/errors/413.html:2 work/templates/errors/413.html:8
 msgid "request.file.is.too.big"
 msgstr "Upload file is too big"
 
-#: work/templates/errors/500.html:2 work/templates/errors/500.html:7
+#: work/templates/errors/500.html:2 work/templates/errors/500.html:8
 msgid "request.internal.error"
 msgstr "Internal Error"
 
-#: work/templates/errors/csrf.html:2 work/templates/errors/csrf.html:7
+#: work/templates/errors/csrf.html:2 work/templates/errors/csrf.html:8
 msgid "request.csrf.error"
 msgstr "CSRF Error"
 
@@ -116,6 +116,19 @@ msgstr "Content"
 msgid "common.save"
 msgstr "Save"
 
+#: work/templates/item/_item.html:22
+msgid "common.cancel"
+msgstr "Cancel"
+
+#: work/templates/item/_item.html:34 work/templates/item/_item.html:81
+#: work/templates/item/_item.html:93
+msgid "item.title.empty"
+msgstr "Title should not be empty!"
+
+#: work/templates/item/_item.html:39
+msgid "item.body.empty"
+msgstr "Content should not be empty!"
+
 #: work/templates/item/_todo.html:3
 msgid "item.add"
 msgstr "Add"
@@ -128,7 +141,19 @@ msgstr "There are no items!"
 msgid "main.intro"
 msgstr "System Introduction"
 
+#: work/views/auth.py:17
+msgid "view.auth.wrong.password"
+msgstr "Wrong password!"
+
+#: work/views/auth.py:19
+msgid "view.auth.user.not.exist"
+msgstr "User does not exist!"
+
 #: work/views/auth.py:21
 msgid "auth.login.success"
 msgstr "Login successfully!"
+
+#: work/views/auth.py:26
+msgid "view.auth.user.logout"
+msgstr "User has been logout!"
 

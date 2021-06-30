@@ -1,5 +1,5 @@
 {% extends 'base.html'%}
-{% block title %}待办事项{% endblock %}
+{% block title %}{{ _('todolist') }}{% endblock %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -16,11 +16,12 @@
     {% if current_user.is_authenticated %}
         authenticated = true
     {% endif %}
+    var itemid = ''                                         //待办ID
     var csrf_token = "{{ csrf_token() }}"                   //CSRF令牌
     var url_for_login_page = "{{ url_for('auth.login') }}"  //登录页面
     var url_for_todo_page = "{{ url_for('item.todo') }}"    //待办页面
     var url_for_intro_page = "{{ url_for('main.intro') }}"  //系统主页
-    var url_for_item_page = "{{ url_for('item.item') }}"     //新增修改待办事项
+    var url_for_item_page = "{{ url_for('item.item') }}"    //新增修改待办事项
     {#
     var url_for_new_item = "{{ url_for('item.new_item') }}"
     var url_for_clear_item = "{{ url_for('item.clear_item') }}"
@@ -68,6 +69,7 @@
             $.ajax({
                 type:'get',
                 url:url,
+                data:{itemid:itemid},
                 success:function(data){
                     //显示页面
                     $('#main').hide().html(data).fadeIn(800)
@@ -98,6 +100,38 @@
         $.get(locale_url, function(){
             //$(window).trigger('hashchange')
             location.reload()
+        })
+    }
+    //新增待办
+    function add(){
+        itemid = ''
+        route('item')
+    }
+    //完成待办
+    function finish(item_id){
+        $.ajax({
+            type:'get',
+            url:'/item/finish',
+            data:{itemid:item_id},
+            success:function(data){
+                location.reload()
+            }
+        })
+    }
+    //编辑待办
+    function edit(item_id){
+        itemid = item_id
+        route('item')
+    }
+    //删除待办
+    function trash(item_id){
+        $.ajax({
+            type:'get',
+            url:'/item/trash',
+            data:{itemid:item_id},
+            success:function(data){
+                location.reload()
+            }
         })
     }
 {% endblock %}

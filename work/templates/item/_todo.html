@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col text-right">
-        <button class="btn btn-outline-success btn-sm" onclick="route('item')"><i class="fas fa-plus"></i>&nbsp;&nbsp;{{_('item.add')}}</button>
+        <button class="btn btn-outline-success btn-sm" onclick="add()"><i class="fas fa-plus"></i>&nbsp;&nbsp;{{_('item.add')}}</button>
     </div>
 </div><br>
 <div class="row">
@@ -19,7 +19,7 @@
                         <small class="float-right">
                             <button class="btn btn-sm btn-link" onclick="finish('{{ item.id }}')"><i class="fas fa-check-circle"></i></button>
                             <button class="btn btn-sm btn-link" onclick="edit('{{ item.id }}')"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-sm btn-link" onclick="delete('{{ item.id }}')"><i class="fas fa-trash-alt"></i></button>
+                            <button class="btn btn-sm btn-link" onclick="trash('{{ item.id }}')"><i class="fas fa-trash-alt"></i></button>
                         </small>
                     </p>
                 </div>

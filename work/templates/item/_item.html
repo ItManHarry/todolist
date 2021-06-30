@@ -3,22 +3,24 @@
         <form class="needs-validation" novalidate id = "item_form">
             <div class="form-group">
               <label for="title">{{ _('item.title') }}</label>
-              <input type="text" class="form-control" id="title" name="title" required>
+              <input type="text" class="form-control" id="title" name="title" required {% if item %}value="{{item.title}}"{% endif %}>
               <div class="invalid-feedback" id = "title_feedback">&nbsp;</div>
             </div>
             <div class="form-group">
               <label for="body">{{ _('item.body') }}</label>
-              <textarea class="form-control" id="body" name="body" rows="3" required></textarea>
+              <textarea class="form-control" id="body" name="body" rows="3" required>{% if item %}{{item.body}}{% endif %}</textarea>
               <div class="invalid-feedback" id = "body_feedback">&nbsp;</div>
             </div>
+            <input type="hidden" id = "id" name="id" {% if item %}value="{{item.id}}"{%else%}value=""{% endif %}>
         </form>
     </div>
 </div>
 <div class="row">
     <div class="col">
         <div class="row">
-            <div class="col-4 offset-8">
-                <button type="button" class="btn btn-outline-info btn-block" id = "save_btn">{{_('common.save')}}</button>
+            <div class="col-4 offset-8 text-right">
+                <button type="button" class="btn btn-outline-info" id = "save_btn"><i class="far fa-save"></i>&nbsp;&nbsp;{{_('common.save')}}</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-outline-secondary" onclick = "route('todo')" id = "cancel_btn"><i class="far fa-window-close"></i>&nbsp;&nbsp;{{_('common.cancel')}}</button>
             </div>
         </div>
     </div>
@@ -30,18 +32,18 @@
             if(!title_ok){
                 $("#title").removeClass('is-valid')
                 $("#title").addClass('is-invalid')
-                $('#title_feedback').html('标题不能为空!!!')
+                $('#title_feedback').html('{{ _('item.title.empty') }}')
             }
             if(!body_ok){
                 $("#body").removeClass('is-valid')
                 $("#body").addClass('is-invalid')
-                $('#body_feedback').html('内容不能为空!!!')
+                $('#body_feedback').html('{{ _('item.body.empty') }}')
             }
             if(title_ok && body_ok){
                 $.ajax({
                     type:'post',
-                    url:'/item/add',
-                    data:JSON.stringify({title:$.trim($("#title").val()), body:$.trim($("#body").val())}),
+                    url:'/item/save',
+                    data:JSON.stringify({title:$.trim($("#title").val()), body:$.trim($("#body").val()), id:$("#id").val()}),
                     contentType:'application/json;charset=UTF-8',
                     success:function(data){
                         if(data.code == 1){
@@ -49,7 +51,7 @@
                         }else{
                             $.alert({
                                type:'red',
-                               title:'系统信息',
+                               title:'{{_('sys.info')}}',
                                content: data.message,
                                onClose:function(){
                                     route('login')
@@ -60,8 +62,8 @@
                     error:function(){
                         $.alert({
                            type:'red',
-                           title:'系统错误',
-                           content: '系统异常,请联系管理员!',
+                           title:'{{_('sys.error')}}',
+                           content: '{{_('system.common.error')}}',
                            onClose:function(){}
                        })
                     }
@@ -77,7 +79,7 @@
             }else{
                 $(this).removeClass('is-valid')
                 $(this).addClass('is-invalid')
-                $('#title_feedback').html('标题不能为空!!!')
+                $('#title_feedback').html('{{ _('item.title.empty') }}')
             }
         })
         $("#body").keyup(function(){
@@ -89,7 +91,7 @@
             }else{
                 $(this).removeClass('is-valid')
                 $(this).addClass('is-invalid')
-                $('#body_feedback').html('内容不能为空!!!')
+                $('#body_feedback').html('{{ _('item.title.empty') }}')
             }
         })
     })

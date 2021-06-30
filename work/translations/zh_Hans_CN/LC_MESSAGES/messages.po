@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-29 11:07+0800\n"
+"POT-Creation-Date: 2021-06-30 13:33+0800\n"
 "PO-Revision-Date: 2021-06-28 16:02+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_CN\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: work/templates/_nav.html:2
+#: work/templates/_nav.html:2 work/templates/index.html:2
 msgid "todolist"
 msgstr "待办事项"
 
@@ -62,46 +62,45 @@ msgstr "账号不能为空！"
 msgid "password.empty"
 msgstr "密码不能为空！"
 
-#: work/templates/auth/_login.html:62
+#: work/templates/auth/_login.html:62 work/templates/item/_item.html:53
 msgid "sys.info"
 msgstr "系统提示"
 
-#: work/templates/auth/_login.html:74
+#: work/templates/auth/_login.html:74 work/templates/item/_item.html:64
 msgid "sys.error"
 msgstr "系统错误"
 
-#: work/templates/auth/_login.html:75
+#: work/templates/auth/_login.html:75 work/templates/item/_item.html:65
 msgid "system.common.error"
-msgstr "系统错误"
+msgstr "系统错误,请联系管理员!"
 
-#: work/templates/errors/400.html:2 work/templates/errors/400.html:7
+#: work/templates/errors/400.html:2 work/templates/errors/400.html:8
 msgid "request.unavailable"
 msgstr "访问无效"
 
-#: work/templates/errors/400.html:8 work/templates/errors/403.html:8
-#: work/templates/errors/404.html:8 work/templates/errors/413.html:8
-#: work/templates/errors/500.html:8 work/templates/errors/csrf.html:8
+#: work/templates/errors/400.html:9 work/templates/errors/403.html:9
+#: work/templates/errors/404.html:9 work/templates/errors/413.html:9
+#: work/templates/errors/500.html:9 work/templates/errors/csrf.html:9
 msgid "back.home"
 msgstr "返回主页"
 
-#: work/templates/errors/403.html:2 work/templates/errors/403.html:7
+#: work/templates/errors/403.html:2 work/templates/errors/403.html:8
 msgid "request.forbidden"
 msgstr "禁止访问"
 
-#: work/templates/errors/404.html:2 work/templates/errors/404.html:7
+#: work/templates/errors/404.html:2 work/templates/errors/404.html:8
 msgid "request.page.not.found"
 msgstr "页面未找到"
 
-#: work/templates/errors/413.html:2 work/templates/errors/413.html:7
+#: work/templates/errors/413.html:2 work/templates/errors/413.html:8
 msgid "request.file.is.too.big"
 msgstr "上传文件过大"
 
-#: work/templates/errors/500.html:2 work/templates/errors/500.html:7
+#: work/templates/errors/500.html:2 work/templates/errors/500.html:8
 msgid "request.internal.error"
 msgstr "系统内部错误"
 
-#: work/templates/errors/csrf.html:2 work/templates/errors/csrf.html:7
-#, fuzzy
+#: work/templates/errors/csrf.html:2 work/templates/errors/csrf.html:8
 msgid "request.csrf.error"
 msgstr "CSRF校验错误！"
 
@@ -117,19 +116,44 @@ msgstr "内容"
 msgid "common.save"
 msgstr "保存"
 
+#: work/templates/item/_item.html:22
+msgid "common.cancel"
+msgstr "取消"
+
+#: work/templates/item/_item.html:34 work/templates/item/_item.html:81
+#: work/templates/item/_item.html:93
+msgid "item.title.empty"
+msgstr "标题不能为空!"
+
+#: work/templates/item/_item.html:39
+msgid "item.body.empty"
+msgstr "内容不能为空！"
+
 #: work/templates/item/_todo.html:3
 msgid "item.add"
 msgstr "添加"
 
 #: work/templates/item/_todo.html:29
 msgid "item.empty"
-msgstr "暂未待办事项！"
+msgstr "暂无待办事项！"
 
 #: work/templates/main/_intro.html:1
 msgid "main.intro"
 msgstr "系统介绍"
 
+#: work/views/auth.py:17
+msgid "view.auth.wrong.password"
+msgstr "密码错误！"
+
+#: work/views/auth.py:19
+msgid "view.auth.user.not.exist"
+msgstr "用户不存在！"
+
 #: work/views/auth.py:21
 msgid "auth.login.success"
 msgstr "登录成功!"
+
+#: work/views/auth.py:26
+msgid "view.auth.user.logout"
+msgstr "用户已登出！"
 

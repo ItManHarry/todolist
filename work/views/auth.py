@@ -14,13 +14,13 @@ def enter():
     user = User.query.filter_by(code=code.lower()).first()
     if user:
         if not user.validate_password(password):
-            return jsonify(code=0, message='密码错误!!!')
+            return jsonify(code=0, message=_('view.auth.wrong.password'))
     else:
-        return jsonify(code=0, message='用户不存在!!!')
+        return jsonify(code=0, message=_('view.auth.user.not.exist'))
     login_user(user, True) #交由flask_login管理登录后的信息
     print(_('auth.login.success'))
     return jsonify(code=1, message='OK')
 @bp_auth.route('/exit')
 def exit():
     logout_user()
-    return jsonify(code=1, message='用户已登出')
+    return jsonify(code=1, message=_('view.auth.user.logout'))
