@@ -17,8 +17,8 @@
                         {{ item.body }}
                         <hr>
                         <small class="float-right">
-                            <button class="btn btn-sm btn-link" onclick="finish('{{ item.id }}')"><i class="fas fa-check-circle"></i></button>
-                            <button class="btn btn-sm btn-link" onclick="edit('{{ item.id }}')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-link" onclick="edit('{{ item.id }}')" {%if item.done %}disabled{%endif%}><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-link" onclick="finish('{{ item.id }}')" {%if item.done %}disabled{%endif%}><i class="fas fa-check-circle"></i></button>
                             <button class="btn btn-sm btn-link" onclick="trash('{{ item.id }}')"><i class="fas fa-trash-alt"></i></button>
                         </small>
                     </p>
