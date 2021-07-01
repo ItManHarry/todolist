@@ -14,6 +14,7 @@ class GlobalSetting():
     BOOTSTRAP_SERVE_LOCAL = True                                    # Bootstrap本地化
     SYS_LOCALES = ['zh_Hans_CN', 'en_US']                           # 国际化区域设置
     BABEL_DEFAULT_LOCALE = SYS_LOCALES[0]                           # 默认语言区域
+    #SERVER_NAME = 'todolist.cn:80'                                 # 主机名+端口号
 #开发配置
 class DevelopSetting(GlobalSetting):
     # 数据库配置

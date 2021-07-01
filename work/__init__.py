@@ -3,6 +3,7 @@ from flask_wtf.csrf import CSRFError
 from work.settings import config
 from work.extensions import bootstrap, db, moment, mail, migrate, csrf, login_manager, babel
 import click, uuid, os
+from work.api.v1 import api_v1
 #创建Flask实例
 def create_app(config_name=None):
     if config_name == None:
@@ -28,6 +29,8 @@ def register_app_extensions(app):
     mail.init_app(app)
     migrate.init_app(app)
     csrf.init_app(app)
+    #web api不需要CSRF保护，予以剔除
+    csrf.exempt(api_v1)
     login_manager.init_app(app)
     babel.init_app(app)
 #配置全局路径
@@ -58,14 +61,18 @@ def register_app_error_pages(app):
     @app.errorhandler(CSRFError)
     def csrf_error(e):
         return render_template('errors/csrf.html')
-#配置系统功能模块
+#配置系统功能模块&Web API
 def register_app_views(app):
+    #web app
     from work.views.auth import bp_auth
     from work.views.main import bp_main
     from work.views.item import bp_item
     app.register_blueprint(bp_auth, url_prefix='/auth')
     app.register_blueprint(bp_main, url_prefix='/main')
     app.register_blueprint(bp_item, url_prefix='/item')
+    #web api
+    app.register_blueprint(api_v1, url_prefix="/api/v1")
+    #app.register_blueprint(api_v1, url_prefix='/v1', subdomain='api') #使用子域名访问web api
 #配置shell环境
 def register_app_shell(app):
     @app.shell_context_processor
