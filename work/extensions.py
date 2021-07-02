@@ -18,13 +18,13 @@ mail = Mail()
 migrate = Migrate()
 csrf = CSRFProtect()
 login_manager = LoginManager()
-babel = Babel()
 #使用flask_login必须配置此项
 @login_manager.user_loader
 def load_user(user_id):
     from work.models import User
     user = User.query.get(user_id)
     return user
+babel = Babel()
 #设置区域选择函数
 @babel.localeselector
 def get_locale():
