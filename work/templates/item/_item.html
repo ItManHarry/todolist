@@ -29,11 +29,15 @@
     var title_ok = false, body_ok = false
     $(function(){
         $("#save_btn").click(function(){
+            if($.trim($("#title").val()) != '')
+                title_ok = true
             if(!title_ok){
                 $("#title").removeClass('is-valid')
                 $("#title").addClass('is-invalid')
                 $('#title_feedback').html('{{ _('item.title.empty') }}')
             }
+            if($.trim($("#body").val()) != '')
+                body_ok = true
             if(!body_ok){
                 $("#body").removeClass('is-valid')
                 $("#body").addClass('is-invalid')
