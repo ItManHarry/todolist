@@ -1,10 +1,11 @@
 from flask import jsonify, url_for, g, request
 from flask.views import MethodView
 from work.api.v1 import api_v1
-from work.models import Item
+from work.models import Item, User
 from work.extensions import db
 from work.api.v1.schemas import item_schema
-from work.api.v1.errors import ValidationError
+from work.api.v1.errors import ValidationError, api_abort
+from work.api.v1.auth import generate_token, auth_required
 class IndexView(MethodView):
     def get(self):
         return jsonify({
@@ -18,11 +19,12 @@ class IndexView(MethodView):
             "current_user_completed_items_url": "http://todolist.cn/api/v1/user/items/completed{?page, per_page}"
         })
 class ItemView(MethodView):
+    decorators = [auth_required]
     def get(self, item_id):
         #获取待办事项
         item = Item.query.get_or_404(item_id)
-        #if g.current_user != item.author:
-            #return jsonify(code=0, message='Wrong user!')
+        if g.current_user != item.author:
+            return jsonify(code=0, message='Wrong user!')
         return jsonify(item_schema(item))
     #修改待办事项
     def put(self, item_id):
@@ -43,6 +45,26 @@ def get_item_values():
         'title': title,
         'body': body
     }
+class AuthTokenAPI(MethodView):
+     def post(self):
+         grant_type = request.form.get('grant_type')
+         username = request.form.get('username')
+         password = request.form.get('password')
+         if grant_type is None or grant_type.lower() != 'password':
+             return api_abort(400, message='The grant type must be password.')
+         user = User.query.filter_by(name=username).first()
+         if user is None or not user.validate_password(password):
+             return api_abort(400, message='User name or password is not right.')
+         token, expiration = generate_token(user)
+         response = jsonify({
+             'access_token': token,
+             'token_type': 'Bearer',
+             'expires_in': expiration
+         })
+         response.headers['Cache-Control'] = 'no-store'
+         response.headers['Pragma'] = 'no-cache'
+         return response
 # 添加路由规则
 api_v1.add_url_rule('/', view_func=IndexView.as_view('index'), methods=['GET'])
+api_v1.add_url_rule('/oauth/token', view_func=AuthTokenAPI.as_view('token'), methods=['POST'])
 api_v1.add_url_rule('/user/items/<item_id>', view_func=ItemView.as_view('item'), methods=['GET', 'PUT'])
