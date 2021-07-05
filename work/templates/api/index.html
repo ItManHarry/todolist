@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %}API Test{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <button id = "token" class="btn btn-outline-primary">获取令牌</button>
+	        <button id  = "put" class="btn btn-outline-info">更改待办</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<script>
+{% block javascript %}
+  var token = ''
+  $(function(){
+      $("#token").click(function(){
+        $.ajax({
+          type:'post',
+          url:'/api/v1/oauth/token',
+          data:{grant_type:'password',username:'admin',password:'harry831102'},
+          contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+          success:function(data){
+            token = data.access_token
+            $.alert({
+               type:'green',
+               title:'{{_('sys.info')}}',
+               content: 'Access token : '+data.access_token + ', token type : ' + data.token_type + ', expires in : ' + data.expires_in,
+               onClose:function(){
+
+               }
+            })
+          },
+          error:function(e){
+            $.alert({
+               type:'red',
+               //icon:'fa fa-info',
+               title:'{{_('sys.error')}}',
+               content: '{{_('system.common.error')}}, error code : '+e.status,
+               onClose:function(){
+
+               }
+            })
+          }
+        })
+      })
+      $("#put").click(function(){
+          if(token == ''){
+            $.alert({
+               type:'red',
+               title:'{{_('sys.info')}}',
+               content: '请先获取令牌!!!',
+               onClose:function(){
+
+               }
+            })
+          }else{
+            $.alert({
+               type:'green',
+               title:'{{_('sys.info')}}',
+               content: '执行修改待办事项!',
+               onClose:function(){
+                  $.ajax({
+                    type:'put',
+                    url:'/api/v1/user/items/da674b5d6b1043d89ccc731142dc4c8f',
+                    data:JSON.stringify({title:'aaa', body:'bbb'}),
+                    contentType:'application/json;charset=UTF-8',
+                    headers:{'Authorization': 'Bearer '+token},
+                    success:function(data){
+                        if(data.code == 1){
+                            $.alert({
+                               type:'green',
+                               title:'{{_('sys.info')}}',
+                               content: data.message,
+                               onClose:function(){
+
+                               }
+                            })
+                        }else{
+                           $.alert({
+                               type:'red',
+                               title:'{{_('sys.info')}}',
+                               content: data.message,
+                               onClose:function(){
+
+                               }
+                           })
+                        }
+                    },
+                    error:function(e){
+                       $.alert({
+                           type:'red',
+                           //icon:'fa fa-info',
+                           title:'{{_('sys.error')}}',
+                           content: '{{_('system.common.error')}}, error code : '+e.status,
+                           onClose:function(){
+
+                           }
+                       })
+                    }
+                })
+               }
+            })
+          }
+
+      })
+  })
+  {% endblock %}
+</script>

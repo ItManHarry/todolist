@@ -67,11 +67,13 @@ def register_app_views(app):
     from work.views.auth import bp_auth
     from work.views.main import bp_main
     from work.views.item import bp_item
+    from work.views.api import api_test
     app.register_blueprint(bp_auth, url_prefix='/auth')
     app.register_blueprint(bp_main, url_prefix='/main')
     app.register_blueprint(bp_item, url_prefix='/item')
     #web api
-    app.register_blueprint(api_v1, url_prefix="/api/v1")
+    app.register_blueprint(api_v1, url_prefix='/api/v1')
+    app.register_blueprint(api_test, url_prefix='/api/test')
     #app.register_blueprint(api_v1, url_prefix='/v1', subdomain='api') #使用子域名访问web api
 #配置shell环境
 def register_app_shell(app):
