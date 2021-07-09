@@ -6,6 +6,7 @@ from work.extensions import db
 from work.api.v1.schemas import item_schema
 from work.api.v1.errors import ValidationError, api_abort
 from work.api.v1.auth import generate_token, auth_required
+import uuid
 class IndexView(MethodView):
     def get(self):
         return jsonify({
@@ -26,13 +27,44 @@ class ItemView(MethodView):
         if g.current_user != item.author:
             return jsonify(code=0, message='Wrong user!')
         return jsonify(item_schema(item))
-    #修改待办事项
+    #新增待办事项
+    def post(self):
+        title = get_item_values()['title']
+        body = get_item_values()['body']
+        item = Item(
+            id=uuid.uuid4().hex,
+            title=title,
+            body=body,
+            author_id=g.current_user.id
+        )
+        db.session.add(item)
+        db.session.commit()
+        return jsonify(code=1, message='待办事项信息新增成功!')
+    # 修改待办事项
     def put(self, item_id):
         item = Item.query.get_or_404(item_id)
+        if g.current_user != item.author:
+            return jsonify(code=0, message='Wrong User!')
         item.title = get_item_values()['title']
         item.body = get_item_values()['body']
         db.session.commit()
         return jsonify(code=1, message='待办事项信息更新成功!')
+    #更改完成状态
+    def patch(self, item_id):
+        item = Item.query.get_or_404(item_id)
+        if g.current_user != item.author:
+            return jsonify(code=1, message='Wrong User!')
+        item.done = not item.done
+        db.session.commit()
+        return jsonify(code=1, message='待办事项完成状态更改成功!')
+    #删除待办
+    def delete(self, item_id):
+        item = Item.query.get_or_404(item_id)
+        if g.current_user != item.author:
+            return jsonify(code=1, message='Wrong User!')
+        db.session.delete(item)
+        db.session.commit()
+        return jsonify(code=1, message='待办事项删除成功!')
 def get_item_values():
     data = request.get_json()
     title = data['title']
@@ -67,4 +99,5 @@ class AuthTokenAPI(MethodView):
 # 添加路由规则
 api_v1.add_url_rule('/', view_func=IndexView.as_view('index'), methods=['GET'])
 api_v1.add_url_rule('/oauth/token', view_func=AuthTokenAPI.as_view('token'), methods=['POST'])
-api_v1.add_url_rule('/user/items/<item_id>', view_func=ItemView.as_view('item'), methods=['GET', 'PUT'])
+api_v1.add_url_rule('/user/items/add', view_func=ItemView.as_view('item-add'), methods=['POST'])
+api_v1.add_url_rule('/user/items/<item_id>', view_func=ItemView.as_view('item-update'), methods=['GET', 'PUT', 'PATCH', 'DELETE'])

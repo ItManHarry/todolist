@@ -6,7 +6,11 @@
     <div class="row">
         <div class="col">
             <button id = "token" class="btn btn-outline-primary">获取令牌</button>
-	        <button id  = "put" class="btn btn-outline-info">更改待办</button>
+            <button id  = "get" class="btn btn-outline-secondary">获取待办</button>
+	        <button id  = "post" class="btn btn-outline-success">新增待办</button>
+            <button id  = "put" class="btn btn-outline-info">更新待办</button>
+            <button id  = "patch" class="btn btn-outline-warning">完成/未完成</button>
+            <button id  = "delbtn" class="btn btn-outline-danger">删除待办</button>
         </div>
     </div>
 </div>
@@ -26,7 +30,7 @@
             $.alert({
                type:'green',
                title:'{{_('sys.info')}}',
-               content: 'Access token : '+data.access_token + ', token type : ' + data.token_type + ', expires in : ' + data.expires_in,
+               content: '令牌 : '+data.access_token ,
                onClose:function(){
 
                }
@@ -44,6 +48,65 @@
             })
           }
         })
+      })
+      $("#post").click(function(){
+          if(token == ''){
+            $.alert({
+               type:'red',
+               title:'{{_('sys.info')}}',
+               content: '请先获取令牌!!!',
+               onClose:function(){
+
+               }
+            })
+          }else{
+            $.alert({
+               type:'green',
+               title:'{{_('sys.info')}}',
+               content: '执行新增待办事项!',
+               onClose:function(){
+                  $.ajax({
+                    type:'post',
+                    url:'/api/v1/user/items/add',
+                    data:JSON.stringify({title:'add', body:'20210710added'}),
+                    contentType:'application/json;charset=UTF-8',
+                    headers:{'Authorization': 'Bearer '+token},
+                    success:function(data){
+                        if(data.code == 1){
+                            $.alert({
+                               type:'green',
+                               title:'{{_('sys.info')}}',
+                               content: data.message,
+                               onClose:function(){
+
+                               }
+                            })
+                        }else{
+                           $.alert({
+                               type:'red',
+                               title:'{{_('sys.info')}}',
+                               content: data.message,
+                               onClose:function(){
+
+                               }
+                           })
+                        }
+                    },
+                    error:function(e){
+                       $.alert({
+                           type:'red',
+                           //icon:'fa fa-info',
+                           title:'{{_('sys.error')}}',
+                           content: '{{_('system.common.error')}}, error code : '+e.status,
+                           onClose:function(){
+
+                           }
+                       })
+                    }
+                })
+               }
+            })
+          }
       })
       $("#put").click(function(){
           if(token == ''){
@@ -63,7 +126,7 @@
                onClose:function(){
                   $.ajax({
                     type:'put',
-                    url:'/api/v1/user/items/d2a2fa0564644236a0b774e03fe12899',
+                    url:'/api/v1/user/items/98800c263b2341aa8cf704f8449209e5',
                     data:JSON.stringify({title:'aaa', body:'bbb'}),
                     contentType:'application/json;charset=UTF-8',
                     headers:{'Authorization': 'Bearer '+token},
@@ -103,7 +166,172 @@
                }
             })
           }
+      })
+      $("#patch").click(function(){
+          if(token == ''){
+            $.alert({
+               type:'red',
+               title:'{{_('sys.info')}}',
+               content: '请先获取令牌!!!',
+               onClose:function(){
 
+               }
+            })
+          }else{
+            $.alert({
+               type:'green',
+               title:'{{_('sys.info')}}',
+               content: '执行修改待办事项状态!',
+               onClose:function(){
+                  $.ajax({
+                    type:'patch',
+                    url:'/api/v1/user/items/98800c263b2341aa8cf704f8449209e5',
+                    data:JSON.stringify({}),
+                    contentType:'application/json;charset=UTF-8',
+                    headers:{'Authorization': 'Bearer '+token},
+                    success:function(data){
+                        if(data.code == 1){
+                            $.alert({
+                               type:'green',
+                               title:'{{_('sys.info')}}',
+                               content: data.message,
+                               onClose:function(){
+
+                               }
+                            })
+                        }else{
+                           $.alert({
+                               type:'red',
+                               title:'{{_('sys.info')}}',
+                               content: data.message,
+                               onClose:function(){
+
+                               }
+                           })
+                        }
+                    },
+                    error:function(e){
+                       $.alert({
+                           type:'red',
+                           //icon:'fa fa-info',
+                           title:'{{_('sys.error')}}',
+                           content: '{{_('system.common.error')}}, error code : '+e.status,
+                           onClose:function(){
+
+                           }
+                       })
+                    }
+                })
+               }
+            })
+          }
+      })
+      $("#delbtn").click(function(){
+          if(token == ''){
+            $.alert({
+               type:'red',
+               title:'{{_('sys.info')}}',
+               content: '请先获取令牌!!!',
+               onClose:function(){
+
+               }
+            })
+          }else{
+            $.alert({
+               type:'green',
+               title:'{{_('sys.info')}}',
+               content: '执行删除待办事项状态!',
+               onClose:function(){
+                  $.ajax({
+                    type:'delete',
+                    url:'/api/v1/user/items/98800c263b2341aa8cf704f8449209e5',
+                    data:JSON.stringify({}),
+                    contentType:'application/json;charset=UTF-8',
+                    headers:{'Authorization': 'Bearer '+token},
+                    success:function(data){
+                        if(data.code == 1){
+                            $.alert({
+                               type:'green',
+                               title:'{{_('sys.info')}}',
+                               content: data.message,
+                               onClose:function(){
+
+                               }
+                            })
+                        }else{
+                           $.alert({
+                               type:'red',
+                               title:'{{_('sys.info')}}',
+                               content: data.message,
+                               onClose:function(){
+
+                               }
+                           })
+                        }
+                    },
+                    error:function(e){
+                       $.alert({
+                           type:'red',
+                           //icon:'fa fa-info',
+                           title:'{{_('sys.error')}}',
+                           content: '{{_('system.common.error')}}, error code : '+e.status,
+                           onClose:function(){
+
+                           }
+                       })
+                    }
+                })
+               }
+            })
+          }
+      })
+      $("#get").click(function(){
+          if(token == ''){
+            $.alert({
+               type:'red',
+               title:'{{_('sys.info')}}',
+               content: '请先获取令牌!!!',
+               onClose:function(){
+
+               }
+            })
+          }else{
+            $.alert({
+               type:'green',
+               title:'{{_('sys.info')}}',
+               content: '获取待办事项信息!',
+               onClose:function(){
+                  $.ajax({
+                    type:'get',
+                    url:'/api/v1/user/items/98800c263b2341aa8cf704f8449209e5',
+                    data:JSON.stringify({}),
+                    contentType:'application/json;charset=UTF-8',
+                    headers:{'Authorization': 'Bearer '+token},
+                    success:function(data){
+                        $.alert({
+                           type:'green',
+                           title:'{{_('sys.info')}}',
+                           content: 'Title is : '+data.title+', content is : ' + data.body + ', author : ' + data.author.name,
+                           onClose:function(){
+
+                           }
+                        })
+                    },
+                    error:function(e){
+                       $.alert({
+                           type:'red',
+                           //icon:'fa fa-info',
+                           title:'{{_('sys.error')}}',
+                           content: '{{_('system.common.error')}}, error code : '+e.status,
+                           onClose:function(){
+
+                           }
+                       })
+                    }
+                })
+               }
+            })
+          }
       })
   })
   {% endblock %}
