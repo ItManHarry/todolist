@@ -1,9 +1,9 @@
-from flask import jsonify, url_for, g, request
+from flask import jsonify, url_for, g, request, current_app
 from flask.views import MethodView
 from work.api.v1 import api_v1
 from work.models import Item, User
 from work.extensions import db
-from work.api.v1.schemas import item_schema
+from work.api.v1.schemas import item_schema, items_schema
 from work.api.v1.errors import ValidationError, api_abort
 from work.api.v1.auth import generate_token, auth_required
 import uuid
@@ -70,9 +70,9 @@ def get_item_values():
     title = data['title']
     body = data['body']
     if title is None or str(title).strip() == '':
-        raise ValidationError('待办事项标题为空或者为传递!')
+        raise ValidationError('待办事项标题为空或者未传递!')
     if body is None or str(body).strip() == '':
-        raise ValidationError('待办事项内容为空或者为传递!')
+        raise ValidationError('待办事项内容为空或者未传递!')
     return {
         'title': title,
         'body': body
@@ -96,6 +96,17 @@ class AuthTokenAPI(MethodView):
          response.headers['Cache-Control'] = 'no-store'
          response.headers['Pragma'] = 'no-cache'
          return response
+#分页获取记录
+@api_v1.route('/item/pages', methods=['GET'])
+@auth_required
+def item_pages():
+    #分页获取待办事项
+    page = request.args.get('page', 1, type=int)
+    pagination = Item.query.with_parent(g.current_user).paginate(page, per_page=current_app.config['TODO_ITEM_PER_PAGE'])
+    items = pagination.items
+    data = items_schema(items, pagination)
+    #print('Items size is : ', len(items), ', and data is : ', data)
+    return jsonify(data)
 # 添加路由规则
 api_v1.add_url_rule('/', view_func=IndexView.as_view('index'), methods=['GET'])
 api_v1.add_url_rule('/oauth/token', view_func=AuthTokenAPI.as_view('token'), methods=['POST'])

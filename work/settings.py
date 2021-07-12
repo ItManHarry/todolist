@@ -15,6 +15,7 @@ class GlobalSetting():
     SYS_LOCALES = ['zh_Hans_CN', 'en_US']                           # 国际化区域设置
     BABEL_DEFAULT_LOCALE = SYS_LOCALES[0]                           # 默认语言区域
     #SERVER_NAME = 'todolist.cn:80'                                 # 主机名+端口号
+    TODO_ITEM_PER_PAGE = 10                                         # 分页获取待办(每页10笔)
 #开发配置
 class DevelopSetting(GlobalSetting):
     # 数据库配置

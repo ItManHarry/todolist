@@ -11,6 +11,7 @@
             <button id  = "put" class="btn btn-outline-info">更新待办</button>
             <button id  = "patch" class="btn btn-outline-warning">完成/未完成</button>
             <button id  = "delbtn" class="btn btn-outline-danger">删除待办</button>
+            <button id  = "pagebtn" class="btn btn-outline-primary">分页获取待办</button>
         </div>
     </div>
 </div>
@@ -312,6 +313,54 @@
                            type:'green',
                            title:'{{_('sys.info')}}',
                            content: 'Title is : '+data.title+', content is : ' + data.body + ', author : ' + data.author.name,
+                           onClose:function(){
+
+                           }
+                        })
+                    },
+                    error:function(e){
+                       $.alert({
+                           type:'red',
+                           //icon:'fa fa-info',
+                           title:'{{_('sys.error')}}',
+                           content: '{{_('system.common.error')}}, error code : '+e.status,
+                           onClose:function(){
+
+                           }
+                       })
+                    }
+                })
+               }
+            })
+          }
+      })
+      $("#pagebtn").click(function(){
+          if(token == ''){
+            $.alert({
+               type:'red',
+               title:'{{_('sys.info')}}',
+               content: '请先获取令牌!!!',
+               onClose:function(){
+
+               }
+            })
+          }else{
+            $.alert({
+               type:'green',
+               title:'{{_('sys.info')}}',
+               content: '分页获取待办事项信息!',
+               onClose:function(){
+                  $.ajax({
+                    type:'get',
+                    url:'/api/v1/item/pages',
+                    data:JSON.stringify({page:1}),
+                    contentType:'application/json;charset=UTF-8',
+                    headers:{'Authorization': 'Bearer '+token},
+                    success:function(data){
+                        $.alert({
+                           type:'green',
+                           title:'{{_('sys.info')}}',
+                           content: data.kind + data.items,
                            onClose:function(){
 
                            }
