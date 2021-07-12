@@ -12,6 +12,7 @@
             <button id  = "patch" class="btn btn-outline-warning">完成/未完成</button>
             <button id  = "delbtn" class="btn btn-outline-danger">删除待办</button>
             <button id  = "pagebtn" class="btn btn-outline-primary">分页获取待办</button>
+            <button id  = "regbtn" class="btn btn-outline-info">注册用户</button>
         </div>
     </div>
 </div>
@@ -381,6 +382,35 @@
                }
             })
           }
+      })
+      $("#regbtn").click(function(){
+        $.ajax({
+          type:'post',
+          url:'/api/v1/user/register2',
+          data:JSON.stringify({code:'',name:'Black2',password:'12345678'}),
+          contentType:'application/json;charset=UTF-8',
+          success:function(data){
+            $.alert({
+               type:'green',
+               title:'{{_('sys.info')}}',
+               content: 'Message  : '+data.message ,
+               onClose:function(){
+
+               }
+            })
+          },
+          error:function(e){
+            $.alert({
+               type:'red',
+               //icon:'fa fa-info',
+               title:'{{_('sys.error')}}',
+               content: '{{_('system.common.error')}}, error code : '+e.status,
+               onClose:function(){
+
+               }
+            })
+          }
+        })
       })
   })
   {% endblock %}

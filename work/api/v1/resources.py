@@ -142,6 +142,12 @@ from webargs.flaskparser import use_kwargs
 @api_v1.route('/user/register3', methods=['POST'])
 @use_kwargs(user_args)
 def register3(code, name, password):
+    u = User.query.filter_by(code=code.lower()).first()
+    if u is None:
+        print('User is not Exist!!!')
+    else:
+        print('User has been Exist!!!')
+        return jsonify(code=0, message='用户代码已存在!')
     user = User(
         id=uuid.uuid4().hex,
         code=code.lower(),
