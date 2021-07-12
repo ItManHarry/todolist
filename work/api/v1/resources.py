@@ -107,6 +107,50 @@ def item_pages():
     data = items_schema(items, pagination)
     #print('Items size is : ', len(items), ', and data is : ', data)
     return jsonify(data)
+# 用户注册-传参方式一
+from webargs.flaskparser import parser
+from work.api.v1.args import user_args
+@api_v1.route('/user/register1', methods=['POST'])
+def register1():
+    print('Do the user register action now...')
+    args = parser.parse(user_args, request)
+    user = User(
+        id=uuid.uuid4().hex,
+        code=args['code'].lower(),
+        name=args['name']
+    )
+    user.set_password(args['password'])
+    db.session.add(user)
+    db.session.commit()
+    return jsonify(code=1, message='用户注册成功!')
+# 传参方式二
+from webargs.flaskparser import use_args
+@api_v1.route('/user/register2', methods=['POST'])
+@use_args(user_args)
+def register2(args):
+    user = User(
+        id=uuid.uuid4().hex,
+        code=args['code'].lower(),
+        name=args['name']
+    )
+    user.set_password(args['password'])
+    db.session.add(user)
+    db.session.commit()
+    return jsonify(code=1, message='用户注册成功!')
+# 传参方式三
+from webargs.flaskparser import use_kwargs
+@api_v1.route('/user/register3', methods=['POST'])
+@use_kwargs(user_args)
+def register3(code, name, password):
+    user = User(
+        id=uuid.uuid4().hex,
+        code=code.lower(),
+        name=name
+    )
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify(code=1, message='用户注册成功!')
 # 添加路由规则
 api_v1.add_url_rule('/', view_func=IndexView.as_view('index'), methods=['GET'])
 api_v1.add_url_rule('/oauth/token', view_func=AuthTokenAPI.as_view('token'), methods=['POST'])

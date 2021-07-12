@@ -69,7 +69,7 @@
                   $.ajax({
                     type:'post',
                     url:'/api/v1/user/items/add',
-                    data:JSON.stringify({title:'add', body:'20210710added'}),
+                    data:JSON.stringify({title:'', body:'20210710added'}),
                     contentType:'application/json;charset=UTF-8',
                     headers:{'Authorization': 'Bearer '+token},
                     success:function(data){
