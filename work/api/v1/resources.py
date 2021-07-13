@@ -126,7 +126,7 @@ def register1():
 # 传参方式二
 from webargs.flaskparser import use_args
 @api_v1.route('/user/register2', methods=['POST'])
-@use_args(user_args)
+@use_args(user_args, location="json")
 def register2(args):
     user = User(
         id=uuid.uuid4().hex,

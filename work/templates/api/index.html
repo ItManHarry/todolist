@@ -386,14 +386,14 @@
       $("#regbtn").click(function(){
         $.ajax({
           type:'post',
-          url:'/api/v1/user/register2',
-          data:JSON.stringify({code:'',name:'Black2',password:'12345678'}),
+          url:'/api/v1/user/register5',
+          data:JSON.stringify({code:'black3',name:'Black3',password:'12345678'}),
           contentType:'application/json;charset=UTF-8',
           success:function(data){
             $.alert({
                type:'green',
                title:'{{_('sys.info')}}',
-               content: 'Message  : '+data.message ,
+               content: 'Message  : '+data.code ,
                onClose:function(){
 
                }
@@ -404,7 +404,7 @@
                type:'red',
                //icon:'fa fa-info',
                title:'{{_('sys.error')}}',
-               content: '{{_('system.common.error')}}, error code : '+e.status,
+               content: '{{_('system.common.error')}}(Error Code : '+e.status+')',
                onClose:function(){
 
                }
