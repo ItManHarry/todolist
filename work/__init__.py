@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, jsonify, request
 from flask_wtf.csrf import CSRFError
 from work.settings import config
 from work.extensions import bootstrap, db, moment, mail, migrate, csrf, login_manager, babel
@@ -48,15 +48,35 @@ def register_app_global_context(app):
 def register_app_error_pages(app):
     @app.errorhandler(400)
     def request_invalid(e):
+        if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
+            response = jsonify(code=400, message='请求错误!')
+            response.status_code = 400
+            return response
         return render_template('errors/400.html'), 400
     @app.errorhandler(403)
     def request_invalid(e):
+        if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
+            response = jsonify(code=403, message='请求资源不可用!')
+            response.status_code = 403
+            return response
         return render_template('errors/403.html'), 403
     @app.errorhandler(404)
     def page_not_found(e):
+        if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
+            response = jsonify(code=404, message='请求资源URL未找到!')
+            response.status_code = 404
+            return response
         return render_template('errors/404.html'), 404
+    @app.errorhandler(422)
+    def unprocessable_entity(e):
+        exc = e.exc
+        return jsonify({'code':0, 'errors': exc.messages}), 422
     @app.errorhandler(500)
     def inner_error(e):
+        if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
+            response = jsonify(code=500, message='服务端内部错误!')
+            response.status_code = 500
+            return response
         return render_template('errors/500.html'), 500
     @app.errorhandler(CSRFError)
     def csrf_error(e):

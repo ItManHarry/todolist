@@ -26,6 +26,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.2
 Mako==1.1.4
 MarkupSafe==1.1.1
+marshmallow==3.12.2
 Pillow==8.2.0
 PyMySQL==1.0.2
 python-dateutil==2.8.1
@@ -35,6 +36,7 @@ pytz==2021.1
 six==1.15.0
 SQLAlchemy==1.4.4
 watchdog==2.0.2
+webargs==8.0.0
 Werkzeug==1.0.1
 Whoosh==2.7.4
 WTForms==2.3.3

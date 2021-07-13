@@ -1,3 +1,4 @@
+#单条记录
 def item_schema(item):
     return {
         'id': item.id,
@@ -12,4 +13,13 @@ def item_schema(item):
             'name': item.author.name,
             'kind': 'User'
         }
+    }
+#多条记录
+def items_schema(items, pagination):
+    return {
+        'kind': 'Items Records',
+        'items': [item_schema(item) for item in items],
+        'first_page': 'N' if pagination.has_prev else 'Y',
+        'last_page': 'N' if pagination.has_next else 'Y',
+        'items_total': pagination.total
     }
