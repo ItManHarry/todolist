@@ -400,11 +400,13 @@
             })
           },
           error:function(e){
+            var responseJson = JSON.parse(e.responseText)
+            alert(responseJson)
             $.alert({
                type:'red',
                //icon:'fa fa-info',
                title:'{{_('sys.error')}}',
-               content: '{{_('system.common.error')}}(Error Code : '+e.status+')',
+               content: '{{_('system.common.error')}}(Error Code : '+e.status+', message is : '+responseJson.message+')',
                onClose:function(){
 
                }
