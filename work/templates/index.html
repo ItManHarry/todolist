@@ -19,6 +19,7 @@
     var itemid = ''                                         //待办ID
     var csrf_token = "{{ csrf_token() }}"                   //CSRF令牌
     var url_for_login_page = "{{ url_for('auth.login') }}"  //登录页面
+    var url_for_reg_page = "{{ url_for('auth.register') }}" //注册页面
     var url_for_todo_page = "{{ url_for('item.todo') }}"    //待办页面
     var url_for_intro_page = "{{ url_for('main.intro') }}"  //系统主页
     var url_for_item_page = "{{ url_for('item.item') }}"    //新增修改待办事项
@@ -60,6 +61,8 @@
             var url = null
             if(hash === 'login')
                 url = url_for_login_page
+            else if(hash === 'reg')
+                url = url_for_reg_page
             else if(hash === 'todo')
                 url = url_for_todo_page
             else if(hash == 'item')
@@ -86,6 +89,8 @@
     function route(to){
         if(to === 'login')
             window.location.hash = '#login'
+        else if(to === 'reg')
+            window.location.hash = '#reg'
         else if(to === 'register')
             window.location.hash = '#register'
         else if(to === 'todo')

@@ -1,6 +1,6 @@
 <div class="row text-center">
     <div class="col">
-        <h1 text-center>Login</h1>
+        <h1 text-center>{{_('auth.account.register')}}</h1>
     </div>
 </div>
 <div class="row">
@@ -12,9 +12,19 @@
               <div class="invalid-feedback" id = "code_feedback">&nbsp;</div>
             </div>
             <div class="form-group">
+              <label for="code">{{_('auth.name')}}</label>
+              <input type="text" class="form-control" id="name" name="name" required>
+              <div class="invalid-feedback" id = "name_feedback">&nbsp;</div>
+            </div>
+            <div class="form-group">
               <label for="password">{{_('auth.password')}}</label>
               <input type="password" class="form-control" id="password" name="password" required>
               <div class="invalid-feedback" id = "password_feedback">&nbsp;</div>
+            </div>
+            <div class="form-group">
+              <label for="password">{{_('auth.confirm.password')}}</label>
+              <input type="password" class="form-control" id="confirm" name="confirm" required>
+              <div class="invalid-feedback" id = "confirm_feedback">&nbsp;</div>
             </div>
         </form>
     </div>
@@ -22,17 +32,14 @@
 <div class="row">
     <div class="col">
         <div class="row">
-            <div class="col-8 text-right">
-                <small>{{_('auth.no.account')}}</small><button class="btn btn-link" onclick="route('reg')">{{_('auth.register')}}</button>
-            </div>
-            <div class="col-4">
-                <button type="button" class="btn btn-outline-info btn-block" id = "login_btn">{{_('auth.login')}}</button>
+            <div class="col-6 offset-6">
+                <button type="button" class="btn btn-outline-info btn-block" id = "login_btn">{{_('auth.do.register')}}</button>
             </div>
         </div>
     </div>
 </div>
 <script>
-    var code_ok = false, password_ok = false
+    var code_ok = false, password_ok = false, name_ok = false, confirm_ok = false
     $(function(){
         $("#login_btn").click(function(){
             if(!code_ok){
@@ -40,22 +47,43 @@
                 $("#code").addClass('is-invalid')
                 $('#code_feedback').html('{{_('account.empty')}}')
             }
+            if(!name_ok){
+                $("#name").removeClass('is-valid')
+                $("#name").addClass('is-invalid')
+                $('#name_feedback').html('{{_('name.empty')}}')
+            }
             if(!password_ok){
                 $("#password").removeClass('is-valid')
                 $("#password").addClass('is-invalid')
                 $('#password_feedback').html('{{_('password.empty')}}')
             }
-            if(code_ok && password_ok){
+            if(!confirm_ok){
+                $("#confirm").removeClass('is-valid')
+                $("#confirm").addClass('is-invalid')
+                $('#confirm_feedback').html('{{_('confirm.empty')}}')
+            }
+            if($("#password").val() != $("#confirm").val()){
+                confirm_ok = false
+                $("#confirm").removeClass('is-valid')
+                $("#confirm").addClass('is-invalid')
+                $('#confirm_feedback').html('{{_('password.is.different')}}')
+            }
+            if(code_ok && password_ok && name_ok && confirm_ok){
                 $.ajax({
                     type:'post',
-                    url:'/auth/enter',
-                    data:JSON.stringify({code:$.trim($("#code").val()), password:$.trim($("#password").val())}),
+                    url:'/auth/register/exe',
+                    data:JSON.stringify({code:$.trim($("#code").val()), name:$.trim($("#name").val()), password:$.trim($("#password").val())}),
                     contentType:'application/json;charset=UTF-8',
                     success:function(data){
                         if(data.code == 1){
-                            $("#sys_logout").show()
-                            $("#sys_login").hide()
-                            route('todo')
+                            $.alert({
+                               type:'green',
+                               title:'{{_('sys.info')}}',
+                               content: data.message,
+                               onClose:function(){
+                                    route('login')
+                               }
+                           })
                         }else{
                             $.alert({
                                type:'red',
@@ -93,6 +121,18 @@
                 $('#code_feedback').html('{{_('account.empty')}}')
             }
         })
+        $("#name").keyup(function(){
+            if($.trim($(this).val()) != ''){
+                $(this).removeClass('is-invalid')
+                $(this).addClass('is-valid')
+                $('#name_feedback').html('&nbsp;')
+                name_ok = true
+            }else{
+                $(this).removeClass('is-valid')
+                $(this).addClass('is-invalid')
+                $('#name_feedback').html('{{_('name.empty')}}')
+            }
+        })
         $("#password").keyup(function(){
             if($.trim($(this).val()) != ''){
                 $(this).removeClass('is-invalid')
@@ -103,6 +143,18 @@
                 $(this).removeClass('is-valid')
                 $(this).addClass('is-invalid')
                 $('#password_feedback').html('{{_('password.empty')}}')
+            }
+        })
+        $("#confirm").keyup(function(){
+            if($.trim($(this).val()) != ''){
+                $(this).removeClass('is-invalid')
+                $(this).addClass('is-valid')
+                $('#confirm_feedback').html('&nbsp;')
+                confirm_ok = true
+            }else{
+                $(this).removeClass('is-valid')
+                $(this).addClass('is-invalid')
+                $('#confirm_feedback').html('{{_('confirm.empty')}}')
             }
         })
     })

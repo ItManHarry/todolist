@@ -5,7 +5,7 @@
 
 2. 使用pybabel extract命令提取所有待翻译文本
 
-    pybabel extract -F babel.cfg - k _l -o messages.pot .
+    pybabel extract -F babel.cfg -k _l -o messages.pot .
 
 3. templates同级目录下创建translations文件夹，使用pybabel init命令来为特定的区域创建消息目录
 

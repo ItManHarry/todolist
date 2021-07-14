@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-30 13:33+0800\n"
+"POT-Creation-Date: 2021-07-14 10:38+0800\n"
 "PO-Revision-Date: 2021-06-28 16:04+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -34,11 +34,46 @@ msgstr "Simple Chinese"
 msgid "lang.en"
 msgstr "English"
 
-#: work/templates/auth/_login.html:10
+#: work/templates/api/index.html:34 work/templates/api/index.html:58
+#: work/templates/api/index.html:67 work/templates/api/index.html:80
+#: work/templates/api/index.html:89 work/templates/api/index.html:117
+#: work/templates/api/index.html:126 work/templates/api/index.html:139
+#: work/templates/api/index.html:148 work/templates/api/index.html:176
+#: work/templates/api/index.html:185 work/templates/api/index.html:198
+#: work/templates/api/index.html:207 work/templates/api/index.html:235
+#: work/templates/api/index.html:244 work/templates/api/index.html:257
+#: work/templates/api/index.html:266 work/templates/api/index.html:294
+#: work/templates/api/index.html:303 work/templates/api/index.html:315
+#: work/templates/api/index.html:342 work/templates/api/index.html:351
+#: work/templates/api/index.html:363 work/templates/api/index.html:395
+#: work/templates/auth/_login.html:62 work/templates/auth/_register.html:81
+#: work/templates/auth/_register.html:90 work/templates/item/_item.html:58
+msgid "sys.info"
+msgstr "System Info"
+
+#: work/templates/api/index.html:45 work/templates/api/index.html:101
+#: work/templates/api/index.html:160 work/templates/api/index.html:219
+#: work/templates/api/index.html:278 work/templates/api/index.html:326
+#: work/templates/api/index.html:374 work/templates/api/index.html:408
+#: work/templates/auth/_login.html:74 work/templates/auth/_register.html:102
+#: work/templates/item/_item.html:69
+msgid "sys.error"
+msgstr "System Error"
+
+#: work/templates/api/index.html:46 work/templates/api/index.html:102
+#: work/templates/api/index.html:161 work/templates/api/index.html:220
+#: work/templates/api/index.html:279 work/templates/api/index.html:327
+#: work/templates/api/index.html:375 work/templates/api/index.html:409
+#: work/templates/auth/_login.html:75 work/templates/auth/_register.html:103
+#: work/templates/item/_item.html:70
+msgid "system.common.error"
+msgstr "System Error"
+
+#: work/templates/auth/_login.html:10 work/templates/auth/_register.html:10
 msgid "auth.account"
 msgstr "Account"
 
-#: work/templates/auth/_login.html:15
+#: work/templates/auth/_login.html:15 work/templates/auth/_register.html:20
 msgid "auth.password"
 msgstr "Password"
 
@@ -55,24 +90,42 @@ msgid "auth.login"
 msgstr "Login"
 
 #: work/templates/auth/_login.html:41 work/templates/auth/_login.html:93
+#: work/templates/auth/_register.html:48 work/templates/auth/_register.html:121
 msgid "account.empty"
 msgstr "Account should not be empty!"
 
 #: work/templates/auth/_login.html:46 work/templates/auth/_login.html:105
+#: work/templates/auth/_register.html:58 work/templates/auth/_register.html:145
 msgid "password.empty"
 msgstr "Password should not be empty!"
 
-#: work/templates/auth/_login.html:62 work/templates/item/_item.html:53
-msgid "sys.info"
-msgstr "System Info"
+#: work/templates/auth/_register.html:3
+msgid "auth.account.register"
+msgstr "Account Register"
 
-#: work/templates/auth/_login.html:74 work/templates/item/_item.html:64
-msgid "sys.error"
-msgstr "System Error"
+#: work/templates/auth/_register.html:15
+msgid "auth.name"
+msgstr "Name"
 
-#: work/templates/auth/_login.html:75 work/templates/item/_item.html:65
-msgid "system.common.error"
-msgstr "System Error"
+#: work/templates/auth/_register.html:25
+msgid "auth.confirm.password"
+msgstr "Confirm Password"
+
+#: work/templates/auth/_register.html:36
+msgid "auth.do.register"
+msgstr "Register"
+
+#: work/templates/auth/_register.html:53 work/templates/auth/_register.html:133
+msgid "name.empty"
+msgstr "Name should not be empty!"
+
+#: work/templates/auth/_register.html:63 work/templates/auth/_register.html:157
+msgid "confirm.empty"
+msgstr "Please confirm the password!"
+
+#: work/templates/auth/_register.html:69
+msgid "password.is.different"
+msgstr "Password is different!"
 
 #: work/templates/errors/400.html:2 work/templates/errors/400.html:8
 msgid "request.unavailable"
@@ -112,20 +165,20 @@ msgstr "Title"
 msgid "item.body"
 msgstr "Content"
 
-#: work/templates/item/_item.html:21
+#: work/templates/item/_item.html:22
 msgid "common.save"
 msgstr "Save"
 
-#: work/templates/item/_item.html:22
+#: work/templates/item/_item.html:23
 msgid "common.cancel"
 msgstr "Cancel"
 
-#: work/templates/item/_item.html:34 work/templates/item/_item.html:81
-#: work/templates/item/_item.html:93
+#: work/templates/item/_item.html:37 work/templates/item/_item.html:86
+#: work/templates/item/_item.html:98
 msgid "item.title.empty"
 msgstr "Title should not be empty!"
 
-#: work/templates/item/_item.html:39
+#: work/templates/item/_item.html:44
 msgid "item.body.empty"
 msgstr "Content should not be empty!"
 
@@ -141,19 +194,27 @@ msgstr "There are no items!"
 msgid "main.intro"
 msgstr "System Introduction"
 
-#: work/views/auth.py:17
+#: work/views/auth.py:25
+msgid "user.has.been.exist"
+msgstr "User has been exist!"
+
+#: work/views/auth.py:34
+msgid "user.register.successfully"
+msgstr "User registered successfully!"
+
+#: work/views/auth.py:43
 msgid "view.auth.wrong.password"
 msgstr "Wrong password!"
 
-#: work/views/auth.py:19
+#: work/views/auth.py:45
 msgid "view.auth.user.not.exist"
 msgstr "User does not exist!"
 
-#: work/views/auth.py:21
+#: work/views/auth.py:47
 msgid "auth.login.success"
 msgstr "Login successfully!"
 
-#: work/views/auth.py:26
+#: work/views/auth.py:52
 msgid "view.auth.user.logout"
 msgstr "User has been logout!"
 

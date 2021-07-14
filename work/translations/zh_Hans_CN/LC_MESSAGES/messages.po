@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-06-30 13:33+0800\n"
+"POT-Creation-Date: 2021-07-14 10:38+0800\n"
 "PO-Revision-Date: 2021-06-28 16:02+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_CN\n"
@@ -34,11 +34,46 @@ msgstr "简体中文"
 msgid "lang.en"
 msgstr "英文"
 
-#: work/templates/auth/_login.html:10
+#: work/templates/api/index.html:34 work/templates/api/index.html:58
+#: work/templates/api/index.html:67 work/templates/api/index.html:80
+#: work/templates/api/index.html:89 work/templates/api/index.html:117
+#: work/templates/api/index.html:126 work/templates/api/index.html:139
+#: work/templates/api/index.html:148 work/templates/api/index.html:176
+#: work/templates/api/index.html:185 work/templates/api/index.html:198
+#: work/templates/api/index.html:207 work/templates/api/index.html:235
+#: work/templates/api/index.html:244 work/templates/api/index.html:257
+#: work/templates/api/index.html:266 work/templates/api/index.html:294
+#: work/templates/api/index.html:303 work/templates/api/index.html:315
+#: work/templates/api/index.html:342 work/templates/api/index.html:351
+#: work/templates/api/index.html:363 work/templates/api/index.html:395
+#: work/templates/auth/_login.html:62 work/templates/auth/_register.html:81
+#: work/templates/auth/_register.html:90 work/templates/item/_item.html:58
+msgid "sys.info"
+msgstr "系统提示"
+
+#: work/templates/api/index.html:45 work/templates/api/index.html:101
+#: work/templates/api/index.html:160 work/templates/api/index.html:219
+#: work/templates/api/index.html:278 work/templates/api/index.html:326
+#: work/templates/api/index.html:374 work/templates/api/index.html:408
+#: work/templates/auth/_login.html:74 work/templates/auth/_register.html:102
+#: work/templates/item/_item.html:69
+msgid "sys.error"
+msgstr "系统错误"
+
+#: work/templates/api/index.html:46 work/templates/api/index.html:102
+#: work/templates/api/index.html:161 work/templates/api/index.html:220
+#: work/templates/api/index.html:279 work/templates/api/index.html:327
+#: work/templates/api/index.html:375 work/templates/api/index.html:409
+#: work/templates/auth/_login.html:75 work/templates/auth/_register.html:103
+#: work/templates/item/_item.html:70
+msgid "system.common.error"
+msgstr "系统错误,请联系管理员!"
+
+#: work/templates/auth/_login.html:10 work/templates/auth/_register.html:10
 msgid "auth.account"
 msgstr "账号"
 
-#: work/templates/auth/_login.html:15
+#: work/templates/auth/_login.html:15 work/templates/auth/_register.html:20
 msgid "auth.password"
 msgstr "密码"
 
@@ -55,24 +90,42 @@ msgid "auth.login"
 msgstr "登录"
 
 #: work/templates/auth/_login.html:41 work/templates/auth/_login.html:93
+#: work/templates/auth/_register.html:48 work/templates/auth/_register.html:121
 msgid "account.empty"
 msgstr "账号不能为空！"
 
 #: work/templates/auth/_login.html:46 work/templates/auth/_login.html:105
+#: work/templates/auth/_register.html:58 work/templates/auth/_register.html:145
 msgid "password.empty"
 msgstr "密码不能为空！"
 
-#: work/templates/auth/_login.html:62 work/templates/item/_item.html:53
-msgid "sys.info"
-msgstr "系统提示"
+#: work/templates/auth/_register.html:3
+msgid "auth.account.register"
+msgstr "账号注册"
 
-#: work/templates/auth/_login.html:74 work/templates/item/_item.html:64
-msgid "sys.error"
-msgstr "系统错误"
+#: work/templates/auth/_register.html:15
+msgid "auth.name"
+msgstr "姓名"
 
-#: work/templates/auth/_login.html:75 work/templates/item/_item.html:65
-msgid "system.common.error"
-msgstr "系统错误,请联系管理员!"
+#: work/templates/auth/_register.html:25
+msgid "auth.confirm.password"
+msgstr "确认密码"
+
+#: work/templates/auth/_register.html:36
+msgid "auth.do.register"
+msgstr "注册"
+
+#: work/templates/auth/_register.html:53 work/templates/auth/_register.html:133
+msgid "name.empty"
+msgstr "姓名不能为空！"
+
+#: work/templates/auth/_register.html:63 work/templates/auth/_register.html:157
+msgid "confirm.empty"
+msgstr "请确认密码！"
+
+#: work/templates/auth/_register.html:69
+msgid "password.is.different"
+msgstr "密码不一致！"
 
 #: work/templates/errors/400.html:2 work/templates/errors/400.html:8
 msgid "request.unavailable"
@@ -112,20 +165,20 @@ msgstr "标题"
 msgid "item.body"
 msgstr "内容"
 
-#: work/templates/item/_item.html:21
+#: work/templates/item/_item.html:22
 msgid "common.save"
 msgstr "保存"
 
-#: work/templates/item/_item.html:22
+#: work/templates/item/_item.html:23
 msgid "common.cancel"
 msgstr "取消"
 
-#: work/templates/item/_item.html:34 work/templates/item/_item.html:81
-#: work/templates/item/_item.html:93
+#: work/templates/item/_item.html:37 work/templates/item/_item.html:86
+#: work/templates/item/_item.html:98
 msgid "item.title.empty"
 msgstr "标题不能为空!"
 
-#: work/templates/item/_item.html:39
+#: work/templates/item/_item.html:44
 msgid "item.body.empty"
 msgstr "内容不能为空！"
 
@@ -141,19 +194,27 @@ msgstr "暂无待办事项！"
 msgid "main.intro"
 msgstr "系统介绍"
 
-#: work/views/auth.py:17
+#: work/views/auth.py:25
+msgid "user.has.been.exist"
+msgstr "用户已存在!"
+
+#: work/views/auth.py:34
+msgid "user.register.successfully"
+msgstr "用户注册成功!"
+
+#: work/views/auth.py:43
 msgid "view.auth.wrong.password"
 msgstr "密码错误！"
 
-#: work/views/auth.py:19
+#: work/views/auth.py:45
 msgid "view.auth.user.not.exist"
 msgstr "用户不存在！"
 
-#: work/views/auth.py:21
+#: work/views/auth.py:47
 msgid "auth.login.success"
 msgstr "登录成功!"
 
-#: work/views/auth.py:26
+#: work/views/auth.py:52
 msgid "view.auth.user.logout"
 msgstr "用户已登出！"
 
