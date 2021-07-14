@@ -192,7 +192,7 @@ msgstr "There are no items!"
 
 #: work/templates/main/_intro.html:1
 msgid "main.intro"
-msgstr "System Introduction"
+msgstr "Welcome!!!"
 
 #: work/views/auth.py:25
 msgid "user.has.been.exist"

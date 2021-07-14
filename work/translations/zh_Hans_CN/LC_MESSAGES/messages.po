@@ -192,7 +192,7 @@ msgstr "暂无待办事项！"
 
 #: work/templates/main/_intro.html:1
 msgid "main.intro"
-msgstr "系统介绍"
+msgstr "欢迎您!!!"
 
 #: work/views/auth.py:25
 msgid "user.has.been.exist"
